@@ -1,4 +1,4 @@
-package kwitter.backend
+package kwitter
 
 import freemarker.cache.ClassTemplateLoader
 import io.ktor.application.Application

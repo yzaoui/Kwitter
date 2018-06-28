@@ -1,4 +1,4 @@
-package kwitter.backend
+package kwitter
 
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode

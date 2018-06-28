@@ -1,4 +1,4 @@
-package kwitter.backend
+package kwitter
 
 import freemarker.loginFTL
 import io.ktor.application.call
