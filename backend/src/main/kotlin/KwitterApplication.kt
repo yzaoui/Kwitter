@@ -2,22 +2,44 @@ package kwitter.backend
 
 import freemarker.cache.ClassTemplateLoader
 import io.ktor.application.Application
+import io.ktor.application.ApplicationCall
 import io.ktor.application.install
+import io.ktor.auth.Authentication
+import io.ktor.auth.authentication
+import io.ktor.content.files
+import io.ktor.content.resources
+import io.ktor.content.static
 import io.ktor.features.CallLogging
 import io.ktor.features.DefaultHeaders
 import io.ktor.freemarker.FreeMarker
 import io.ktor.locations.Location
 import io.ktor.locations.Locations
+import io.ktor.locations.locations
+import io.ktor.request.host
+import io.ktor.request.port
+import io.ktor.response.respondRedirect
 import io.ktor.routing.routing
 
-@Location("/")
-class Index
+@Location(Index.path)
+class Index {
+    companion object {
+        const val path = "/"
+    }
+}
 
-@Location("/login")
-class Login
+@Location(Login.path)
+class Login {
+    companion object {
+        const val path = "/login"
+    }
+}
 
-@Location("/signup")
-class SignUp
+@Location(SignUp.path)
+class SignUp {
+    companion object {
+        const val path = "/signup"
+    }
+}
 
 fun Application.main() {
     install(DefaultHeaders)
@@ -30,5 +52,8 @@ fun Application.main() {
         index()
         login()
         signUp()
+        static("static") {
+            resources("css")
+        }
     }
 }

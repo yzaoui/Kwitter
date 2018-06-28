@@ -19,9 +19,9 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
         </ul>
-        <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username">
-            <input class="form-control mr-sm-2" type="text" placeholder="Password" aria-label="Password">
+        <form class="form-inline mt-2 mt-md-0" action="${loginHref}" method="post" enctype="application/x-www-form-urlencoded">
+            <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username" name="username" required>
+            <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" name="password" required>
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log in</button>
         </form>
     </div>
