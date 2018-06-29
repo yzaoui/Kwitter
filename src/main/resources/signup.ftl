@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="loginHref" type="String" -->
+<#-- @ftlvariable name="signUpHref" type="String" -->
 <#-- @ftlvariable name="errorMessage" type="String" -->
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Login - Kwitter</title>
+    <title>Sign Up - Kwitter</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
@@ -19,14 +19,16 @@
     <a class="navbar-brand" href="/">Kwitter</a>
 </nav>
 
-<form class="centered-form" action="${loginHref}" method="post" enctype="application/x-www-form-urlencoded">
-    <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
+<form class="centered-form" action="${signUpHref}" method="post" enctype="application/x-www-form-urlencoded">
+    <h1 class="h3 mb-3 font-weight-normal">Create your account</h1>
     <#if errorMessage??>
     <div class="alert alert-danger" role="alert">${errorMessage}</div>
     </#if>
     <input type="text" class="form-control" placeholder="Username" required autofocus>
     <input type="password" class="form-control" placeholder="Password" required>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <input type="text" class="form-control" placeholder="Display Name" required>
+    <input type="email" class="form-control" placeholder="Email" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
 </form>
 </body>
 </html>
