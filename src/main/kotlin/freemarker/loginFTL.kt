@@ -1,4 +1,4 @@
-package freemarker
+package kwitter.freemarker
 
 import io.ktor.freemarker.FreeMarkerContent
 
