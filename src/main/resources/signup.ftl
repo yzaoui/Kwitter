@@ -10,8 +10,8 @@
 
     <title>Sign Up - Kwitter</title>
 
-    <link rel="stylesheet" href="static/bootstrap.min.css">
-    <link rel="stylesheet" href="static/form.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/form.css">
 </head>
 
 <body class="text-center">

@@ -3,6 +3,7 @@ package kwitter
 import freemarker.cache.ClassTemplateLoader
 import io.ktor.application.Application
 import io.ktor.application.install
+import io.ktor.content.files
 import io.ktor.content.resources
 import io.ktor.content.static
 import io.ktor.features.CallLogging
@@ -72,8 +73,10 @@ fun Application.main() {
         login()
         logout()
         signUp()
-        static("static") {
-            resources("css")
+        static("assets") {
+            static("css") {
+                resources("css")
+            }
         }
     }
 }

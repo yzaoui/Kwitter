@@ -8,7 +8,7 @@
 
     <title>Welcome - Kwitter</title>
 
-    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
@@ -20,8 +20,8 @@
         <ul class="navbar-nav mr-auto">
         </ul>
         <form class="form-inline mt-2 mt-md-0" action="${loginHref}" method="post" enctype="application/x-www-form-urlencoded">
-            <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username" name="username" required>
-            <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" name="password" required>
+            <input type="text" name="username" class="form-control mr-sm-2" placeholder="Username" aria-label="Username" required>
+            <input type="password" name="password" class="form-control mr-sm-2" placeholder="Password" aria-label="Password" required>
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log in</button>
         </form>
     </div>

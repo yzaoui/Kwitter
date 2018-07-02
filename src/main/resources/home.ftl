@@ -8,7 +8,7 @@
 
     <title>Home - Kwitter</title>
 
-    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">

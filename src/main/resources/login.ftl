@@ -8,8 +8,8 @@
 
     <title>Login - Kwitter</title>
 
-    <link rel="stylesheet" href="static/bootstrap.min.css">
-    <link rel="stylesheet" href="static/form.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/form.css">
 </head>
 
 <body class="text-center">
@@ -23,8 +23,8 @@
     <#if errorMessage??>
     <div class="alert alert-danger" role="alert">${errorMessage}</div>
     </#if>
-    <input type="text" class="form-control" placeholder="Username" required autofocus>
-    <input type="password" class="form-control" placeholder="Password" required>
+    <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+    <input type="password" name="password" class="form-control" placeholder="Password" required>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 </form>
 </body>
