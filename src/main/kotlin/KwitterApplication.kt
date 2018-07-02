@@ -29,6 +29,13 @@ class Login {
     }
 }
 
+@Location(Logout.path)
+class Logout {
+    companion object {
+        const val path = "/logout"
+    }
+}
+
 @Location(SignUp.path)
 class SignUp {
     companion object {
@@ -45,8 +52,8 @@ object UserRepository {
         users[user.username] = user
     }
 
-    fun get(username: String) {
-        users[username]
+    fun get(username: String): User? {
+        return users[username]
     }
 }
 
@@ -58,11 +65,12 @@ fun Application.main() {
         templateLoader = ClassTemplateLoader(this::class.java.classLoader, "")
     }
     install(Sessions) {
-        cookie<KwitterSession>("SESSION")
+        cookie<KwitterSession>("kwitter_session")
     }
     routing {
         index()
         login()
+        logout()
         signUp()
         static("static") {
             resources("css")
