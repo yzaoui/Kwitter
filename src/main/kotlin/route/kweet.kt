@@ -10,14 +10,15 @@ import io.ktor.sessions.sessions
 import kwitter.KwitterSession
 import kwitter.MAX_KWEET_LENGTH
 import kwitter.data.KweetRepository
+import kwitter.data.UserRepository
 import kwitter.location.IndexLocation
 import kwitter.location.KweetLocation
 import kwitter.location.LoginLocation
 
 fun Route.kweet() {
     post<KweetLocation> {
-        val session = call.sessions.get<KwitterSession>()
-        if (session == null) {
+        val user = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+        if (user == null) {
             call.respondRedirect(LoginLocation.path)
             return@post
         }
@@ -31,7 +32,7 @@ fun Route.kweet() {
             return@post
         }
 
-        KweetRepository.create(session.username, newKweetText)
+        KweetRepository.create(user.username, newKweetText)
         call.respondRedirect(IndexLocation.path)
     }
 }

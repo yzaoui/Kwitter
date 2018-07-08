@@ -32,7 +32,7 @@
         </form>
     </div>
     <div>
-        <@kweetList.kweet_list kweets=kweets/>
+        <@kweetList.kweet_list kweets=kweets />
     </div>
 </main>
 </@main.body>

@@ -17,13 +17,7 @@ import kwitter.location.*
 
 fun Route.index() {
     get<IndexLocation> {
-        val session = call.sessions.get<KwitterSession>()
-        if (session == null) {
-            call.respond(guestIndex())
-            return@get
-        }
-
-        val user = UserRepository.get(session.username)
+        val user = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
         if (user == null) {
             call.respond(guestIndex())
             return@get

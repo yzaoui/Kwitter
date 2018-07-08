@@ -6,7 +6,7 @@
 <#macro kweet_list kweets>
 <ul>
     <#list kweets as kweet>
-    <@kweet_li kweet=kweet/>
+    <@kweet_li kweet=kweet />
     <#else>
     There are no kweets yet. Try following someone or posting your own!
     </#list>
