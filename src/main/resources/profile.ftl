@@ -1,6 +1,6 @@
 <#-- @ftlvariable name="user" type="kwitter.data.model.User" -->
-<#import "main.ftl" as main />
-<#import "nav.ftl" as nav />
+<#import "macros/main.ftl" as main />
+<#import "macros/nav.ftl" as nav />
 <@main.html>
 <@main.head title="${user.displayName} (@${user.username})" />
 <@main.body>

@@ -2,8 +2,8 @@
 <#-- @ftlvariable name="errorMessage" type="String" -->
 <#-- @ftlvariable name="MIN_LENGTH_USERNAME" type="java.lang.Number" -->
 <#-- @ftlvariable name="MAX_LENGTH_USERNAME" type="java.lang.Number" -->
-<#import "main.ftl" as main />
-<#import "nav.ftl" as nav />
+<#import "macros/main.ftl" as main />
+<#import "macros/nav.ftl" as nav />
 <@main.html>
 <@main.head title="Sign Up" />
 <@main.body>

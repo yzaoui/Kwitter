@@ -3,9 +3,9 @@
 <#-- @ftlvariable name="kweetHref" type="String" -->
 <#-- @ftlvariable name="maxKweetLength" type="Integer" -->
 <#-- @ftlvariable name="kweets" type="kotlin.collections.List<kwitter.data.model.Kweet>" -->
-<#import "main.ftl" as main />
-<#import "nav.ftl" as nav />
-<#import "kweet-list.ftl" as kweetList>
+<#import "macros/main.ftl" as main />
+<#import "macros/nav.ftl" as nav />
+<#import "macros/kweet-list.ftl" as kweetList>
 <@main.html>
 <@main.head title="Home" />
 <@main.body>

@@ -1,7 +1,7 @@
 <#-- @ftlvariable name="signUpHref" type="String" -->
 <#-- @ftlvariable name="loginHref" type="String" -->
-<#import "main.ftl" as main />
-<#import "nav.ftl" as nav />
+<#import "macros/main.ftl" as main />
+<#import "macros/nav.ftl" as nav />
 <@main.html>
 <@main.head title="Welcome" />
 <@main.body>
