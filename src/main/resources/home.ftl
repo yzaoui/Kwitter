@@ -32,7 +32,6 @@
 <main role="main" class="container">
     <div class="jumbotron">
         <h1>Welcome, ${displayName}!</h1>
-        <p class="lead">Here's where your own dashboard will go probably</p>
     </div>
     <div>
         <form action="${kweetHref}" method="post" enctype="application/x-www-form-urlencoded">
