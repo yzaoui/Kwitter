@@ -34,6 +34,7 @@ fun Application.main() {
         logout()
         signUp()
         kweet()
+        profile()
         static("assets") {
             static("css") {
                 resources("css")
