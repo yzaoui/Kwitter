@@ -1,5 +1,6 @@
 <#-- @ftlvariable name="displayName" type="String" -->
 <#-- @ftlvariable name="logoutHref" type="String" -->
+<#-- @ftlvariable name="kweetHref" type="String" -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +30,12 @@
     <div class="jumbotron">
         <h1>Welcome, ${displayName}!</h1>
         <p class="lead">Here's where your own dashboard will go probably</p>
+    </div>
+    <div>
+        <form action="${kweetHref}" method="post" enctype="application/x-www-form-urlencoded">
+            <textarea name="new-kweet" title="New kweet input" maxlength="280" placeholder="What's up?" style="width: 100%"></textarea>
+            <button type="submit" style="float: right">Kweet</button>
+        </form>
     </div>
 </main>
 

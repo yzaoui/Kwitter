@@ -44,6 +44,13 @@ class SignUp {
     }
 }
 
+@Location(Kweet.path)
+class Kweet {
+    companion object {
+        const val path = "/kweet"
+    }
+}
+
 data class KwitterSession(val username: String)
 
 fun Application.main() {
