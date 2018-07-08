@@ -1,4 +1,4 @@
-package kwitter.model
+package kwitter.data.model
 
 data class User(
     val username: String,

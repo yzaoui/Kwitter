@@ -1,6 +1,9 @@
 <#-- @ftlvariable name="displayName" type="String" -->
 <#-- @ftlvariable name="logoutHref" type="String" -->
 <#-- @ftlvariable name="kweetHref" type="String" -->
+<#-- @ftlvariable name="maxKweetLength" type="Integer" -->
+<#-- @ftlvariable name="kweets" type="kotlin.collections.List<kwitter.data.model.Kweet>" -->
+<#import "kweet-list.ftl" as kweetList>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,9 +36,12 @@
     </div>
     <div>
         <form action="${kweetHref}" method="post" enctype="application/x-www-form-urlencoded">
-            <textarea name="new-kweet" title="New kweet input" maxlength="280" placeholder="What's up?" style="width: 100%"></textarea>
+            <textarea name="new-kweet-text" title="New kweet input" maxlength="${maxKweetLength}" placeholder="What's up?" style="width: 100%" required></textarea>
             <button type="submit" style="float: right">Kweet</button>
         </form>
+    </div>
+    <div>
+        <@kweetList.kweet_list kweets=kweets/>
     </div>
 </main>
 

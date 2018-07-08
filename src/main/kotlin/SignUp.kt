@@ -1,6 +1,5 @@
 package kwitter
 
-import data.UserRepository
 import io.ktor.application.call
 import io.ktor.locations.get
 import io.ktor.locations.post
@@ -10,8 +9,9 @@ import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
 import io.ktor.sessions.sessions
 import io.ktor.sessions.set
+import kwitter.data.UserRepository
+import kwitter.data.model.User
 import kwitter.freemarker.signupFTL
-import kwitter.model.User
 
 fun Route.signUp() {
     get<SignUp> {

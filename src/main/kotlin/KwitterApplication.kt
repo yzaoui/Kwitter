@@ -3,7 +3,6 @@ package kwitter
 import freemarker.cache.ClassTemplateLoader
 import io.ktor.application.Application
 import io.ktor.application.install
-import io.ktor.content.files
 import io.ktor.content.resources
 import io.ktor.content.static
 import io.ktor.features.CallLogging
@@ -14,7 +13,6 @@ import io.ktor.locations.Locations
 import io.ktor.routing.routing
 import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
-import kwitter.model.User
 
 @Location(Index.path)
 class Index {
@@ -44,14 +42,16 @@ class SignUp {
     }
 }
 
-@Location(Kweet.path)
-class Kweet {
+@Location(KweetLocation.path)
+class KweetLocation {
     companion object {
         const val path = "/kweet"
     }
 }
 
 data class KwitterSession(val username: String)
+
+const val MAX_KWEET_LENGTH = 280
 
 fun Application.main() {
     install(DefaultHeaders)
@@ -68,6 +68,7 @@ fun Application.main() {
         login()
         logout()
         signUp()
+        kweet()
         static("assets") {
             static("css") {
                 resources("css")
