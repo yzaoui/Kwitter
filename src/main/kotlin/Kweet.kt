@@ -8,12 +8,15 @@ import io.ktor.routing.Route
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kwitter.data.KweetRepository
+import kwitter.location.IndexLocation
+import kwitter.location.KweetLocation
+import kwitter.location.LoginLocation
 
 fun Route.kweet() {
     post<KweetLocation> {
         val session = call.sessions.get<KwitterSession>()
         if (session == null) {
-            call.respondRedirect(Login.path)
+            call.respondRedirect(LoginLocation.path)
             return@post
         }
 
@@ -22,11 +25,11 @@ fun Route.kweet() {
 
         // In case of invalid submission, return to homepage
         if (newKweetText == null || newKweetText.length !in 1..MAX_KWEET_LENGTH) {
-            call.respondRedirect(Index.path)
+            call.respondRedirect(IndexLocation.path)
             return@post
         }
 
         KweetRepository.create(session.username, newKweetText)
-        call.respondRedirect(Index.path)
+        call.respondRedirect(IndexLocation.path)
     }
 }

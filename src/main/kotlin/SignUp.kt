@@ -12,12 +12,14 @@ import io.ktor.sessions.set
 import kwitter.data.UserRepository
 import kwitter.data.model.User
 import kwitter.freemarker.signupFTL
+import kwitter.location.IndexLocation
+import kwitter.location.SignUpLocation
 
 fun Route.signUp() {
-    get<SignUp> {
-        call.respond(signupFTL(signUpHref = SignUp.path))
+    get<SignUpLocation> {
+        call.respond(signupFTL(signUpHref = SignUpLocation.path))
     }
-    post<SignUp> {
+    post<SignUpLocation> {
         val params = call.receiveParameters()
         val errorMessages = mutableListOf<String>()
 
@@ -35,7 +37,7 @@ fun Route.signUp() {
             )
             UserRepository.create(newUser)
             call.sessions.set(KwitterSession(newUser.username))
-            call.respondRedirect(Index.path)
+            call.respondRedirect(IndexLocation.path)
         } else {
             if (usernameParam == null) errorMessages.add("Missing username.")
             if (passwordParam == null) errorMessages.add("Missing password.")
@@ -43,7 +45,7 @@ fun Route.signUp() {
             if (emailParam == null) errorMessages.add("Missing email.")
 
             call.respond(signupFTL(
-                signUpHref = SignUp.path,
+                signUpHref = SignUpLocation.path,
                 errorMessage = errorMessages.joinToString("<br>")
             ))
         }

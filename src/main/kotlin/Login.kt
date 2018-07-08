@@ -11,12 +11,14 @@ import io.ktor.sessions.sessions
 import io.ktor.sessions.set
 import kwitter.data.UserRepository
 import kwitter.freemarker.loginFTL
+import kwitter.location.IndexLocation
+import kwitter.location.LoginLocation
 
 fun Route.login() {
-    get<Login> {
-        call.respond(loginFTL(loginHref = Login.path))
+    get<LoginLocation> {
+        call.respond(loginFTL(loginHref = LoginLocation.path))
     }
-    post<Login> {
+    post<LoginLocation> {
         val params = call.receiveParameters()
         val errorMessages = mutableListOf<String>()
 
@@ -27,7 +29,7 @@ fun Route.login() {
             val user = UserRepository.get(usernameParam)
             if (passwordParam == user?.passwordHash) {
                 call.sessions.set(KwitterSession(user.username))
-                call.respondRedirect(Index.path)
+                call.respondRedirect(IndexLocation.path)
             } else {
                 call.respond(loginPageWithError("Incorrect username and/or password."))
             }
@@ -41,6 +43,6 @@ fun Route.login() {
 }
 
 private fun loginPageWithError(errorMessage: String) = loginFTL(
-    loginHref = Login.path,
+    loginHref = LoginLocation.path,
     errorMessage = errorMessage
 )

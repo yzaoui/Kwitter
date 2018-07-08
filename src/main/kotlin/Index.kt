@@ -11,9 +11,10 @@ import kwitter.data.UserRepository
 import kwitter.data.model.Kweet
 import kwitter.freemarker.homeFTL
 import kwitter.freemarker.welcomeFTL
+import kwitter.location.*
 
 fun Route.index() {
-    get<Index> {
+    get<IndexLocation> {
         val session = call.sessions.get<KwitterSession>()
         if (session == null) {
             call.respond(guestIndex())
@@ -33,13 +34,13 @@ fun Route.index() {
 }
 
 private fun guestIndex() = welcomeFTL(
-    signUpHref = SignUp.path,
-    loginHref = Login.path
+    signUpHref = SignUpLocation.path,
+    loginHref = LoginLocation.path
 )
 
 private fun loggedInIndex(displayName: String, kweets: List<Kweet>) = homeFTL(
     displayName = displayName,
-    logoutHref = Logout.path,
+    logoutHref = LogoutLocation.path,
     kweetHref = KweetLocation.path,
     maxKweetLength = MAX_KWEET_LENGTH,
     kweets = kweets
