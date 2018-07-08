@@ -12,6 +12,7 @@ import io.ktor.locations.Locations
 import io.ktor.routing.routing
 import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
+import kwitter.route.*
 
 data class KwitterSession(val username: String)
 
