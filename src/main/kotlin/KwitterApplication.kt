@@ -39,6 +39,9 @@ fun Application.main() {
             static("css") {
                 resources("css")
             }
+            static("images") {
+                resources("images")
+            }
         }
     }
 }

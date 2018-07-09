@@ -3,6 +3,8 @@
 <#-- @ftlvariable name="kweetHref" type="String" -->
 <#-- @ftlvariable name="maxKweetLength" type="Integer" -->
 <#-- @ftlvariable name="kweets" type="kotlin.collections.List<kwitter.data.model.Kweet>" -->
+<#-- @ftlvariable name="profileURL" type="String" -->
+<#-- @ftlvariable name="profilePictureURL" type="String" -->
 <#import "macros/main.ftl" as main />
 <#import "macros/nav.ftl" as nav />
 <#import "macros/kweet-list.ftl" as kweetList>
@@ -11,6 +13,9 @@
 <@main.body>
 <@nav.main>
 <@nav.items>
+<a href="${profileURL}" style="margin-right: 16px">
+    <img src="${profilePictureURL}" alt="Profile picture" style="width: 40px; height: 40px">
+</a>
 <form class="form-inline mt-2 mt-md-0" action="${logoutHref}" method="post" enctype="application/x-www-form-urlencoded">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out</button>
 </form>

@@ -26,7 +26,7 @@ fun Route.index() {
 
         val kweets = KweetRepository.getAll()
 
-        call.respond(loggedInIndex(user.displayName, kweets))
+        call.respond(loggedInIndex(user.displayName, kweets, ProfileLocation.createPath(user.username), "assets/images/default.png"))
     }
 }
 
@@ -35,12 +35,14 @@ private fun guestIndex() = welcomeFTL(
     loginHref = LoginLocation.path
 )
 
-private fun loggedInIndex(displayName: String, kweets: List<Kweet>) = homeFTL(
+private fun loggedInIndex(displayName: String, kweets: List<Kweet>, profileURL: String, profilePictureURL: String) = homeFTL(
     displayName = displayName,
     logoutHref = LogoutLocation.PATH,
     kweetHref = KweetLocation.path,
     maxKweetLength = MAX_KWEET_LENGTH,
-    kweets = kweets.map { wrapMentionsWithHtmlLinks(it) }
+    kweets = kweets.map { wrapMentionsWithHtmlLinks(it) },
+    profileURL = profileURL,
+    profilePictureURL = profilePictureURL
 )
 
 private fun wrapMentionsWithHtmlLinks(kweet: Kweet): Kweet {
