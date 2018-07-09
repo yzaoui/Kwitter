@@ -36,7 +36,7 @@ private fun guestIndex() = welcomeFTL(
 
 private fun loggedInIndex(displayName: String, kweets: List<Kweet>) = homeFTL(
     displayName = displayName,
-    logoutHref = LogoutLocation.path,
+    logoutHref = LogoutLocation.PATH,
     kweetHref = KweetLocation.path,
     maxKweetLength = MAX_KWEET_LENGTH,
     kweets = kweets

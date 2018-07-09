@@ -9,18 +9,13 @@
 <@main.html>
 <@main.head title="Home" />
 <@main.body>
-<@nav.nav>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-        </ul>
-        <form class="form-inline mt-2 mt-md-0" action="${logoutHref}" method="post" enctype="application/x-www-form-urlencoded">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out</button>
-        </form>
-    </div>
-</@nav.nav>
+<@nav.main>
+<@nav.items>
+<form class="form-inline mt-2 mt-md-0" action="${logoutHref}" method="post" enctype="application/x-www-form-urlencoded">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out</button>
+</form>
+</@nav.items>
+</@nav.main>
 <main role="main" class="container">
     <div class="jumbotron">
         <h1>Welcome, ${displayName}!</h1>

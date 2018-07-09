@@ -6,7 +6,7 @@
 <@main.html>
 <@main.head title="Sign Up" />
 <@main.body>
-<@nav.nav />
+<@nav.main />
 <form class="centered-form" action="${SIGN_UP_HREF}" method="post" enctype="application/x-www-form-urlencoded">
     <h1 class="h3 mb-3 font-weight-normal text-center">Create your account</h1>
     <#if errorMessage??>

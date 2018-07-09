@@ -5,7 +5,7 @@
 <@main.html>
 <@main.head title="Login" />
 <@main.body>
-<@nav.nav />
+<@nav.main />
 <form class="centered-form" action="${loginHref}" method="post" enctype="application/x-www-form-urlencoded">
     <h1 class="h3 mb-3 font-weight-normal text-center">Please log in</h1>
     <#if errorMessage??>

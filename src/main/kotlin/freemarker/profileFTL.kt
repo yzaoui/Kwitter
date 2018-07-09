@@ -2,10 +2,12 @@ package kwitter.freemarker
 
 import io.ktor.freemarker.FreeMarkerContent
 import kwitter.data.model.User
+import kwitter.location.LogoutLocation
 
 fun profileFTL(user: User) = FreeMarkerContent(
     template = "profile.ftl",
     model = mapOf(
-        "user" to user
+        "user" to user,
+        "logoutHref" to LogoutLocation.PATH
     )
 )
