@@ -6,5 +6,7 @@ import io.ktor.locations.Location
 class ProfileLocation(val username: String) {
     companion object {
         const val path = "/{username}"
+
+        fun createPath(username: String) = "/$username"
     }
 }

@@ -8,6 +8,7 @@ import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kwitter.KwitterSession
 import kwitter.MAX_KWEET_LENGTH
+import kwitter.USERNAME_REGEX
 import kwitter.data.KweetRepository
 import kwitter.data.UserRepository
 import kwitter.data.model.Kweet
@@ -39,5 +40,16 @@ private fun loggedInIndex(displayName: String, kweets: List<Kweet>) = homeFTL(
     logoutHref = LogoutLocation.PATH,
     kweetHref = KweetLocation.path,
     maxKweetLength = MAX_KWEET_LENGTH,
-    kweets = kweets
+    kweets = kweets.map { wrapMentionsWithHtmlLinks(it) }
 )
+
+private fun wrapMentionsWithHtmlLinks(kweet: Kweet): Kweet {
+    return kweet.copy(text = "@$USERNAME_REGEX".toRegex().replace(kweet.text) {
+        val username = it.value.removePrefix("@")
+        if (UserRepository.get(username) != null) {
+            "<a href=\"${ProfileLocation.createPath(username)}\">${it.value}</a>"
+        } else {
+            it.value
+        }
+    })
+}
