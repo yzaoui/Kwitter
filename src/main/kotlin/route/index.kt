@@ -30,7 +30,7 @@ fun Route.index() {
 }
 
 private fun guestIndex() = welcomeFTL(
-    signUpHref = SignUpLocation.path,
+    signUpHref = SignUpLocation.PATH,
     loginHref = LoginLocation.path
 )
 

@@ -2,9 +2,9 @@ package kwitter.location
 
 import io.ktor.locations.Location
 
-@Location(SignUpLocation.path)
+@Location(SignUpLocation.PATH)
 class SignUpLocation {
     companion object {
-        const val path = "/signup"
+        const val PATH = "/signup"
     }
 }

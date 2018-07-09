@@ -10,6 +10,7 @@ import io.ktor.routing.Route
 import io.ktor.sessions.sessions
 import io.ktor.sessions.set
 import kwitter.KwitterSession
+import kwitter.USERNAME_REGEX
 import kwitter.data.UserRepository
 import kwitter.data.model.User
 import kwitter.freemarker.signupFTL
@@ -18,18 +19,19 @@ import kwitter.location.SignUpLocation
 
 fun Route.signUp() {
     get<SignUpLocation> {
-        call.respond(signupFTL(signUpHref = SignUpLocation.path))
+        call.respond(signupFTL())
     }
     post<SignUpLocation> {
         val params = call.receiveParameters()
         val errorMessages = mutableListOf<String>()
 
         val usernameParam = params["username"]
+        val usernameValid = usernameParam?.matches(USERNAME_REGEX.toRegex()) ?: false
         val passwordParam = params["password"] //TODO: Handle password better
         val displayNameParam = params["displayName"]
         val emailParam = params["email"]
 
-        if (usernameParam != null && passwordParam != null && displayNameParam != null && emailParam != null) {
+        if (usernameParam != null && usernameValid && passwordParam != null && displayNameParam != null && emailParam != null) {
             val newUser = User(
                 username = usernameParam,
                 passwordHash = passwordParam,
@@ -41,12 +43,12 @@ fun Route.signUp() {
             call.respondRedirect(IndexLocation.path)
         } else {
             if (usernameParam == null) errorMessages.add("Missing username.")
+            else if (!usernameValid) errorMessages.add("Username must consist of 1-15 letters, numbers, and/or underscores.")
             if (passwordParam == null) errorMessages.add("Missing password.")
             if (displayNameParam == null) errorMessages.add("Missing display name.")
             if (emailParam == null) errorMessages.add("Missing email.")
 
             call.respond(signupFTL(
-                signUpHref = SignUpLocation.path,
                 errorMessage = errorMessages.joinToString("<br>")
             ))
         }

@@ -1,20 +1,19 @@
 package kwitter.freemarker
 
 import io.ktor.freemarker.FreeMarkerContent
+import kwitter.USERNAME_REGEX
+import kwitter.location.SignUpLocation
 
-private fun signupFTLBuilder(model: Map<String, Any>) = FreeMarkerContent(
-    template = "signup.ftl",
-    model = model.plus(mapOf(
-        "MIN_LENGTH_USERNAME" to 4, //TODO: Constants
-        "MAX_LENGTH_USERNAME" to 15 //TODO: Constants
-    ))
-)
+fun signupFTL() = signupFTLDefault()
 
-fun signupFTL(signUpHref: String) = signupFTLBuilder(mapOf(
-    "signUpHref" to signUpHref
-))
-
-fun signupFTL(signUpHref: String, errorMessage: String) = signupFTLBuilder(mapOf(
-    "signUpHref" to signUpHref,
+fun signupFTL(errorMessage: String) = signupFTLDefault(mapOf(
     "errorMessage" to errorMessage
 ))
+
+private fun signupFTLDefault(model: Map<String, Any> = emptyMap()) = FreeMarkerContent(
+    template = "signup.ftl",
+    model = model.plus(mapOf(
+        "SIGN_UP_HREF" to SignUpLocation.PATH,
+        "USERNAME_REGEX" to USERNAME_REGEX
+    ))
+)
