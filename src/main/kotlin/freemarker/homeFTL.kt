@@ -22,5 +22,6 @@ data class HTMLKweet (
     val dateText: String,
     val authorDisplayName: String,
     val authorUsername: String,
-    val authorProfilePictureURL: String
+    val authorProfilePictureURL: String,
+    val authorProfileURL: String
 )

@@ -3,7 +3,7 @@
 <li class="kweet">
     <div class="kweet-inside">
         <div class="kweet-head">
-            <a class="kweet-author-group" href="#">
+            <a class="kweet-author-group" href="${htmlKweet.authorProfileURL}">
                 <img class="kweet-author-img" src="${htmlKweet.authorProfilePictureURL}">
                 <span class="kweet-author-display-name"><strong>${htmlKweet.authorDisplayName}</strong></span>
                 <span class="kweet-author-username">@${htmlKweet.authorUsername}</span>
