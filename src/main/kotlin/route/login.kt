@@ -17,7 +17,7 @@ import kwitter.location.LoginLocation
 
 fun Route.login() {
     get<LoginLocation> {
-        call.respond(loginFTL(loginHref = LoginLocation.path))
+        call.respond(loginFTL(loginHref = LoginLocation.PATH))
     }
     post<LoginLocation> {
         val params = call.receiveParameters()
@@ -44,6 +44,6 @@ fun Route.login() {
 }
 
 private fun loginPageWithError(errorMessage: String) = loginFTL(
-    loginHref = LoginLocation.path,
+    loginHref = LoginLocation.PATH,
     errorMessage = errorMessage
 )

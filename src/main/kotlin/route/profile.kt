@@ -5,6 +5,9 @@ import io.ktor.locations.get
 import io.ktor.response.respond
 import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
+import io.ktor.sessions.get
+import io.ktor.sessions.sessions
+import kwitter.KwitterSession
 import kwitter.data.UserRepository
 import kwitter.freemarker.profileFTL
 import kwitter.location.IndexLocation
@@ -19,6 +22,12 @@ fun Route.profile() {
             return@get
         }
 
-        call.respond(profileFTL(user))
+        val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+
+        if (loggedInUser != null) {
+
+        }
+
+        call.respond(if (loggedInUser != null) profileFTL(user, loggedInUser, ProfileLocation.createPath(loggedInUser.username)) else profileFTL(user))
     }
 }

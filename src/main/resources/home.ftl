@@ -1,10 +1,9 @@
-<#-- @ftlvariable name="displayName" type="String" -->
+<#-- @ftlvariable name="loggedInUser" type="kwitter.data.model.User" -->
 <#-- @ftlvariable name="logoutHref" type="String" -->
 <#-- @ftlvariable name="kweetHref" type="String" -->
 <#-- @ftlvariable name="maxKweetLength" type="Integer" -->
 <#-- @ftlvariable name="kweets" type="kotlin.collections.List<kwitter.data.model.Kweet>" -->
 <#-- @ftlvariable name="profileURL" type="String" -->
-<#-- @ftlvariable name="profilePictureURL" type="String" -->
 <#import "macros/main.ftl" as main />
 <#import "macros/nav.ftl" as nav />
 <#import "macros/kweet-list.ftl" as kweetList>
@@ -14,7 +13,7 @@
 <@nav.main>
 <@nav.items>
 <a href="${profileURL}" style="margin-right: 16px">
-    <img src="${profilePictureURL}" alt="Profile picture" style="width: 40px; height: 40px">
+    <img src="${loggedInUser.profilePictureURL}" alt="Profile picture" style="width: 40px; height: 40px">
 </a>
 <form class="form-inline mt-2 mt-md-0" action="${logoutHref}" method="post" enctype="application/x-www-form-urlencoded">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out</button>
@@ -23,7 +22,7 @@
 </@nav.main>
 <main role="main" class="container">
     <div class="jumbotron">
-        <h1>Welcome, ${displayName}!</h1>
+        <h1>Welcome, ${loggedInUser.displayName}!</h1>
     </div>
     <div>
         <form action="${kweetHref}" method="post" enctype="application/x-www-form-urlencoded">

@@ -36,7 +36,8 @@ fun Route.signUp() {
                 username = usernameParam,
                 passwordHash = passwordParam,
                 displayName = displayNameParam,
-                email = emailParam
+                email = emailParam,
+                profilePictureURL = "/assets/images/default.png"
             )
             UserRepository.create(newUser)
             call.sessions.set(KwitterSession(newUser.username))

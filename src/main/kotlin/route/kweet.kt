@@ -19,7 +19,7 @@ fun Route.kweet() {
     post<KweetLocation> {
         val user = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
         if (user == null) {
-            call.respondRedirect(LoginLocation.path)
+            call.respondRedirect(LoginLocation.PATH)
             return@post
         }
 

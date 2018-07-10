@@ -7,7 +7,7 @@ object UserRepository {
 
     //TODO: Temp data
     init {
-        users["username"] = User("username", "password", "Display_Name", "email@example.com")
+        users["username"] = User("username", "password", "Display_Name", "email@example.com", "/assets/images/default.png")
     }
 
     fun create(user: User) {

@@ -12,6 +12,7 @@ import kwitter.USERNAME_REGEX
 import kwitter.data.KweetRepository
 import kwitter.data.UserRepository
 import kwitter.data.model.Kweet
+import kwitter.data.model.User
 import kwitter.freemarker.homeFTL
 import kwitter.freemarker.welcomeFTL
 import kwitter.location.*
@@ -26,23 +27,22 @@ fun Route.index() {
 
         val kweets = KweetRepository.getAll()
 
-        call.respond(loggedInIndex(user.displayName, kweets, ProfileLocation.createPath(user.username), "assets/images/default.png"))
+        call.respond(loggedInIndex(user, kweets, ProfileLocation.createPath(user.username)))
     }
 }
 
 private fun guestIndex() = welcomeFTL(
     signUpHref = SignUpLocation.PATH,
-    loginHref = LoginLocation.path
+    loginHref = LoginLocation.PATH
 )
 
-private fun loggedInIndex(displayName: String, kweets: List<Kweet>, profileURL: String, profilePictureURL: String) = homeFTL(
-    displayName = displayName,
+private fun loggedInIndex(loggedInUser: User, kweets: List<Kweet>, profileURL: String) = homeFTL(
+    loggedInUser = loggedInUser,
     logoutHref = LogoutLocation.PATH,
     kweetHref = KweetLocation.path,
     maxKweetLength = MAX_KWEET_LENGTH,
     kweets = kweets.map { wrapMentionsWithHtmlLinks(it) },
-    profileURL = profileURL,
-    profilePictureURL = profilePictureURL
+    profileURL = profileURL
 )
 
 private fun wrapMentionsWithHtmlLinks(kweet: Kweet): Kweet {
