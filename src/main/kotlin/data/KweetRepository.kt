@@ -4,17 +4,18 @@ import kwitter.data.model.Kweet
 import java.time.Instant
 
 object KweetRepository {
-    private val kweets = mutableListOf<Kweet>()
+    private val kweets: MutableMap<String, Kweet> = mutableMapOf()
 
     fun create(username: String, text: String) {
-        kweets.add(Kweet(
-            id = kweets.size.toString(),
+        val id = kweets.size.toString()
+        kweets[id] = (Kweet(
+            id = id,
             username = username,
             text = text,
             date = Instant.now()
         ))
     }
 
-    fun get(kweetId: Int): Kweet? = kweets[kweetId]
-    fun getAll(): List<Kweet> = kweets
+    fun get(kweetId: String): Kweet? = kweets[kweetId]
+    fun getAll(): Iterable<Kweet> = kweets.values
 }

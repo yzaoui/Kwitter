@@ -17,6 +17,7 @@ fun homeFTL(loggedInUser: User, logoutHref: String, newKweetHref: String, maxKwe
 
 data class HTMLKweet (
     val id: String,
+    val text: String,
     val html: String,
     val dateText: String,
     val kweetURL: String,

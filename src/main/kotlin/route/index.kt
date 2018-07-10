@@ -47,10 +47,11 @@ private fun loggedInIndex(loggedInUser: User, htmlKweets: List<HTMLKweet>, profi
     profileURL = profileURL
 )
 
-private fun Kweet.toHTMLKweet(userRepo: UserRepository): HTMLKweet {
+fun Kweet.toHTMLKweet(userRepo: UserRepository): HTMLKweet {
     val user = userRepo.get(username)!!
     return HTMLKweet(
         id = id,
+        text = text,
         html = "@$USERNAME_REGEX".toRegex().replace(text) {
             val username = it.value.removePrefix("@")
             if (UserRepository.get(username) != null) {

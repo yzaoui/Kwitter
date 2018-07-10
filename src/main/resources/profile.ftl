@@ -1,7 +1,7 @@
 <#-- @ftlvariable name="user" type="kwitter.data.model.User" -->
 <#-- @ftlvariable name="loginHref" type="String" -->
 <#-- @ftlvariable name="loggedInUser" type="kwitter.data.model.User" -->
-<#-- @ftlvariable name="loggedInUserURL" type="kwitter.data.model.User" -->
+<#-- @ftlvariable name="loggedInUserURL" type="String" -->
 <#-- @ftlvariable name="logoutHref" type="String" -->
 <#import "macros/main.ftl" as main />
 <#import "macros/nav.ftl" as nav />

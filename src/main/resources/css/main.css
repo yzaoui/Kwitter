@@ -37,16 +37,29 @@ body {
     margin-right: 5px;
 }
 
+.kweet-author-group:hover {
+    text-decoration: none;
+}
+
 .kweet-author-display-name {
     color: #14171a;
 }
 
-.kweet-author-display-name:hover {
+.kweet-author-group:hover .kweet-author-display-name {
     color: #0084B4;
+    text-decoration: underline;
 }
 
 .kweet-author-username {
     color: #657786;
+}
+
+.kweet-time a {
+    color: #657786;
+}
+
+.kweet-time a:hover {
+    color: #0084B4;
 }
 
 .kweet-time:before {
@@ -71,4 +84,62 @@ body {
 
 .kweet-content {
     white-space: pre-wrap;
+    margin-bottom: 0;
+}
+
+.kweet-content a {
+    color: #0084B4;
+}
+
+/* Individual kweet page */
+
+.ikweet-head {
+    margin-left: 72px;
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.ikweet-author-img {
+    margin-left: -72px;
+    float: left;
+}
+
+.ikweet-author-group {
+    line-height: 18px;
+    float: left;
+}
+
+.ikweet-author-group:hover {
+    text-decoration: none;
+}
+
+.ikweet-author-display-name {
+    display: block;
+    color: #292f33;
+    line-height: 1.5;
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.ikweet-author-group:hover .ikweet-author-display-name {
+    text-decoration: underline;
+    color: #0084B4;
+}
+
+.ikweet-author-username {
+    color: #8899a6;
+}
+
+.ikweet-content {
+    font-size: 28px;
+    white-space: pre-wrap;
+}
+
+.ikweet-content a {
+    color: #0084B4;
+}
+
+.ikweet-time {
+    font-size: 13px;
+    color: #8899a6;
 }

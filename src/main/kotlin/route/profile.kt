@@ -24,10 +24,6 @@ fun Route.profile() {
 
         val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
 
-        if (loggedInUser != null) {
-
-        }
-
         call.respond(if (loggedInUser != null) profileFTL(user, loggedInUser, ProfileLocation.createPath(loggedInUser.username)) else profileFTL(user))
     }
 }
