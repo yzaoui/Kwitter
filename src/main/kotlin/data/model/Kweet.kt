@@ -6,4 +6,5 @@ data class Kweet(
     val id: Int,
     val username: String,
     val text: String,
-    val date: Instant)
+    val date: Instant
+)

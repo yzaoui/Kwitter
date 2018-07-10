@@ -2,7 +2,7 @@
 <#-- @ftlvariable name="logoutHref" type="String" -->
 <#-- @ftlvariable name="kweetHref" type="String" -->
 <#-- @ftlvariable name="maxKweetLength" type="Integer" -->
-<#-- @ftlvariable name="kweets" type="kotlin.collections.List<kwitter.data.model.Kweet>" -->
+<#-- @ftlvariable name="htmlKweets" type="kotlin.collections.List<kwitter.freemarker.HTMLKweet>" -->
 <#-- @ftlvariable name="profileURL" type="String" -->
 <#import "macros/main.ftl" as main />
 <#import "macros/nav.ftl" as nav />
@@ -31,7 +31,7 @@
         </form>
     </div>
     <div>
-        <@kweetList.kweet_list kweets=kweets />
+        <@kweetList.kweet_list htmlKweets=htmlKweets />
     </div>
 </main>
 </@main.body>
