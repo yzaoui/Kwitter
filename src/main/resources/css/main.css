@@ -1,3 +1,7 @@
+body {
+    background-color: #e6ecf0;
+}
+
 .centered-form {
     padding: 15px;
     margin: auto;
@@ -6,4 +10,25 @@
 
 .centered-form > input {
     margin-bottom: 10px;
+}
+
+.new-kweet-form {
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+.kweet-list {
+    padding-left: 0;
+}
+
+.kweet {
+    background-color: white;
+    list-style: none;
+    border-bottom: 1px solid #e6ecf0;
+    padding: 9px 12px;
+    word-wrap: break-word;
+}
+
+.kweet:hover {
+    background-color: #f5f8fa;
 }

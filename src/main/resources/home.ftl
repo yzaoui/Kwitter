@@ -25,7 +25,7 @@
         <h1>Welcome, ${loggedInUser.displayName}!</h1>
     </div>
     <div>
-        <form action="${kweetHref}" method="post" enctype="application/x-www-form-urlencoded">
+        <form class="new-kweet-form" action="${kweetHref}" method="post" enctype="application/x-www-form-urlencoded">
             <textarea name="new-kweet-text" title="New kweet input" maxlength="${maxKweetLength}" placeholder="What's up?" style="width: 100%" required></textarea>
             <button type="submit" style="float: right">Kweet</button>
         </form>
