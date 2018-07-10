@@ -41,10 +41,14 @@ body {
     margin-top: 5px;
 }
 
-.content {
+.kweet-inside {
     margin-left: 50px;
 }
 
 .kweet:hover {
     background-color: #f5f8fa;
+}
+
+.kweet-content {
+    white-space: pre-wrap;
 }

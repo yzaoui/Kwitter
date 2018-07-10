@@ -32,7 +32,15 @@ fun Route.kweet() {
             return@post
         }
 
-        KweetRepository.create(user.username, newKweetText)
+        val transformedKweetText = newKweetText.let {
+            // Replace \r\n and \r with \n
+            Regex("\\r\\n|\\r").replace(it, "\n")
+        }.let {
+            // Replace \n\n(\n)* with \n\n
+            Regex("\\n{3,}").replace(it, "\n\n")
+        }
+
+        KweetRepository.create(user.username, transformedKweetText)
         call.respondRedirect(IndexLocation.path)
     }
 }
