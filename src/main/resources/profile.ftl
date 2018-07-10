@@ -26,5 +26,10 @@
     </#if>
     </@nav.items>
 </@nav.main>
+<main role="main" class="container">
+    <div class="jumbotron" style="background-color: white">
+        <h1>${user.displayName} @${user.username}</h1>
+    </div>
+</main>
 </@main.body>
 </@main.html>

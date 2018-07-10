@@ -1,6 +1,6 @@
 <#-- @ftlvariable name="loggedInUser" type="kwitter.data.model.User" -->
 <#-- @ftlvariable name="logoutHref" type="String" -->
-<#-- @ftlvariable name="kweetHref" type="String" -->
+<#-- @ftlvariable name="newKweetHref" type="String" -->
 <#-- @ftlvariable name="maxKweetLength" type="Integer" -->
 <#-- @ftlvariable name="htmlKweets" type="kotlin.collections.List<kwitter.freemarker.HTMLKweet>" -->
 <#-- @ftlvariable name="profileURL" type="String" -->
@@ -25,7 +25,7 @@
         <h1>Welcome, ${loggedInUser.displayName}!</h1>
     </div>
     <div>
-        <form class="new-kweet-form" action="${kweetHref}" method="post" enctype="application/x-www-form-urlencoded">
+        <form class="new-kweet-form" action="${newKweetHref}" method="post" enctype="application/x-www-form-urlencoded">
             <textarea name="new-kweet-text" title="New kweet input" maxlength="${maxKweetLength}" placeholder="What's up?" style="width: 100%" required></textarea>
             <button type="submit" style="float: right">Kweet</button>
         </form>

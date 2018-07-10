@@ -8,7 +8,7 @@ object KweetRepository {
 
     fun create(username: String, text: String) {
         kweets.add(Kweet(
-            id = kweets.size,
+            id = kweets.size.toString(),
             username = username,
             text = text,
             date = Instant.now()

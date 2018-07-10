@@ -41,7 +41,7 @@ private fun guestIndex() = welcomeFTL(
 private fun loggedInIndex(loggedInUser: User, htmlKweets: List<HTMLKweet>, profileURL: String) = homeFTL(
     loggedInUser = loggedInUser,
     logoutHref = LogoutLocation.PATH,
-    kweetHref = KweetLocation.path,
+    newKweetHref = KweetLocation.path,
     maxKweetLength = MAX_KWEET_LENGTH,
     htmlKweets = htmlKweets,
     profileURL = profileURL
@@ -60,6 +60,7 @@ private fun Kweet.toHTMLKweet(userRepo: UserRepository): HTMLKweet {
             }
         },
         dateText = date.toString(),
+        kweetURL = IndividualKweetLocation.createPath(username, id),
         authorDisplayName = user.displayName,
         authorUsername = user.username,
         authorProfilePictureURL = user.profilePictureURL,

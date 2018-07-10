@@ -8,7 +8,7 @@
                 <span class="kweet-author-display-name"><strong>${htmlKweet.authorDisplayName}</strong></span>
                 <span class="kweet-author-username">@${htmlKweet.authorUsername}</span>
             </a>
-            <span class="kweet-time"><a href="#">${htmlKweet.dateText}</a></span>
+            <span class="kweet-time"><a href="${htmlKweet.kweetURL}">${htmlKweet.dateText}</a></span>
         </div>
         <div class="kweet-body"><p class="kweet-content">${htmlKweet.html}</p></div>
     </div>
