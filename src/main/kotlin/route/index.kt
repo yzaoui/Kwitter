@@ -59,7 +59,7 @@ private fun Kweet.toHTMLKweet(userRepo: UserRepository): HTMLKweet {
                 it.value
             }
         },
-        date = date,
+        dateText = date.toString(),
         authorDisplayName = user.displayName,
         authorUsername = user.username,
         authorProfilePictureURL = user.profilePictureURL

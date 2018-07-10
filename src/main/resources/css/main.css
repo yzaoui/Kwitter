@@ -29,8 +29,28 @@ body {
     word-wrap: break-word;
 }
 
+.kweet-head {
+    display: flex;
+}
+
+.kweet-author-group {
+    margin-right: 5px;
+}
+
+.kweet-author-display-name {
+    color: #14171a;
+}
+
+.kweet-author-display-name:hover {
+    color: #0084B4;
+}
+
 .kweet-author-username {
     color: #657786;
+}
+
+.kweet-time:before {
+    content: "\00b7";
 }
 
 .kweet-author-img {
