@@ -20,7 +20,7 @@
 </form>
 </@nav.items>
 </@nav.main>
-<main role="main" class="container">
+<main class="dashboard-main">
     <div class="jumbotron">
         <h1>Welcome, ${loggedInUser.displayName}!</h1>
     </div>

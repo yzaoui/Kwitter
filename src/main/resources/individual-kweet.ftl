@@ -27,7 +27,7 @@
         </#if>
     </@nav.items>
 </@nav.main>
-<main role="main" class="container">
+<main class="ikweet-main">
     <@kweetList.kweet_individual htmlKweet=htmlKweet/>
 </main>
 </@main.body>
