@@ -26,7 +26,9 @@ fun Application.main() {
         templateLoader = ClassTemplateLoader(this::class.java.classLoader, "")
     }
     install(Sessions) {
-        cookie<KwitterSession>("kwitter_session")
+        cookie<KwitterSession>("kwitter_session") {
+            cookie.path = "/"
+        }
     }
     routing {
         index()
