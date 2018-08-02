@@ -1,10 +1,12 @@
 <#-- @ftlvariable name="user" type="kwitter.data.model.User" -->
+<#-- @ftlvariable name="htmlKweets" type="kotlin.collections.List<kwitter.freemarker.HTMLKweet>" -->
 <#-- @ftlvariable name="loginHref" type="String" -->
 <#-- @ftlvariable name="loggedInUser" type="kwitter.data.model.User" -->
 <#-- @ftlvariable name="loggedInUserURL" type="String" -->
 <#-- @ftlvariable name="logoutHref" type="String" -->
 <#import "macros/main.ftl" as main />
 <#import "macros/nav.ftl" as nav />
+<#import "macros/kweet-list.ftl" as kweetList>
 <@main.html>
 <@main.head title="${user.displayName} (@${user.username})" />
 <@main.body>
@@ -26,9 +28,12 @@
     </#if>
     </@nav.items>
 </@nav.main>
-<main role="main" class="container">
-    <div class="jumbotron" style="background-color: white">
+<main role="main">
+    <section>
         <h1>${user.displayName} @${user.username}</h1>
+    </section>
+    <div>
+        <@kweetList.kweet_list htmlKweets=htmlKweets />
     </div>
 </main>
 </@main.body>

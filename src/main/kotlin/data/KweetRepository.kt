@@ -17,5 +17,6 @@ object KweetRepository {
     }
 
     fun get(kweetId: String): Kweet? = kweets[kweetId]
-    fun getAll(): Iterable<Kweet> = kweets.values
+    fun getAll(): Iterable<Kweet> = kweets.values.asIterable()
+    fun getAllFrom(username: String): Iterable<Kweet> = kweets.values.filter { it.username == username }.asIterable()
 }

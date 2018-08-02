@@ -20,7 +20,7 @@
 </form>
 </@nav.items>
 </@nav.main>
-<main class="dashboard-main">
+<main class="timeline-main">
     <div class="jumbotron">
         <h1>Welcome, ${loggedInUser.displayName}!</h1>
     </div>

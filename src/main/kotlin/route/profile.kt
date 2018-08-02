@@ -9,7 +9,9 @@ import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kwitter.KwitterSession
 import kwitter.data.UserRepository
+import kwitter.domain.usecase.ListUserKweets
 import kwitter.freemarker.profileFTL
+import kwitter.freemarker.profileFTLGuest
 import kwitter.location.IndexLocation
 import kwitter.location.ProfileLocation
 
@@ -23,7 +25,8 @@ fun Route.profile() {
         }
 
         val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+        val htmlKweets = ListUserKweets.getKweets(user.username).map { it.toHTMLKweet(UserRepository) }
 
-        call.respond(if (loggedInUser != null) profileFTL(user, loggedInUser, ProfileLocation.createPath(loggedInUser.username)) else profileFTL(user))
+        call.respond(if (loggedInUser != null) profileFTL(user, htmlKweets, loggedInUser, ProfileLocation.createPath(loggedInUser.username)) else profileFTLGuest(user, htmlKweets))
     }
 }

@@ -22,7 +22,7 @@
     <#list htmlKweets as htmlKweet>
     <@kweet_li htmlKweet=htmlKweet />
     <#else>
-    There are no kweets yet. Try following someone or posting your own!
+    <div class="alert alert-light text-center font-weight-bold">There are no kweets yet.</div>
     </#list>
 </ol>
 </#macro>
