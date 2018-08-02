@@ -2,9 +2,9 @@ package kwitter.location
 
 import io.ktor.locations.Location
 
-@Location(IndexLocation.path)
+@Location(IndexLocation.PATH)
 class IndexLocation {
     companion object {
-        const val path = "/"
+        const val PATH = "/"
     }
 }

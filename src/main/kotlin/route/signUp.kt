@@ -41,7 +41,7 @@ fun Route.signUp() {
             )
             UserRepository.create(newUser)
             call.sessions.set(KwitterSession(newUser.username))
-            call.respondRedirect(IndexLocation.path)
+            call.respondRedirect(IndexLocation.PATH)
         } else {
             if (usernameParam == null) errorMessages.add("Missing username.")
             else if (!usernameValid) errorMessages.add("Username must consist of 1-15 letters, numbers, and/or underscores.")

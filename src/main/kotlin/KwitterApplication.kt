@@ -39,6 +39,7 @@ fun Application.main() {
         profile()
         individualKweet()
         follow()
+        unfollow()
         static("assets") {
             static("css") {
                 resources("css")

@@ -13,6 +13,6 @@ import kwitter.location.LogoutLocation
 fun Route.logout() {
     post<LogoutLocation> {
         call.sessions.clear<KwitterSession>()
-        call.respondRedirect(IndexLocation.path)
+        call.respondRedirect(IndexLocation.PATH)
     }
 }

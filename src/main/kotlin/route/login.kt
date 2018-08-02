@@ -30,7 +30,7 @@ fun Route.login() {
             val user = UserRepository.get(usernameParam)
             if (passwordParam == user?.passwordHash) {
                 call.sessions.set(KwitterSession(user.username))
-                call.respondRedirect(IndexLocation.path)
+                call.respondRedirect(IndexLocation.PATH)
             } else {
                 call.respond(loginPageWithError("Incorrect username and/or password."))
             }

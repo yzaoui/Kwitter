@@ -15,10 +15,7 @@ import kwitter.freemarker.individualKweetFTL
 import kwitter.freemarker.individualKweetFTLFollowing
 import kwitter.freemarker.individualKweetFTLGuest
 import kwitter.freemarker.individualKweetFTLNotFollowing
-import kwitter.location.FollowLocation
-import kwitter.location.IndexLocation
-import kwitter.location.IndividualKweetLocation
-import kwitter.location.ProfileLocation
+import kwitter.location.*
 
 fun Route.individualKweet() {
     get<IndividualKweetLocation> {
@@ -26,7 +23,7 @@ fun Route.individualKweet() {
         val kweet = KweetRepository.get(it.kweetId)
 
         if (!(author != null && kweet != null && kweet.username == author.username)) {
-            call.respondRedirect(IndexLocation.path)
+            call.respondRedirect(IndexLocation.PATH)
             return@get
         }
 
@@ -37,11 +34,14 @@ fun Route.individualKweet() {
         if (loggedInUser != null) {
             when {
                 // One's own kweet
-                loggedInUser.username == author.username -> call.respond(individualKweetFTL(htmlKweet, loggedInUser, ProfileLocation.createPath(loggedInUser.username)))
+                loggedInUser.username == author.username ->
+                    call.respond(individualKweetFTL(htmlKweet, loggedInUser, ProfileLocation.createPath(loggedInUser.username)))
                 // Kweet of someone one follows
-                CheckFollow.follows(loggedInUser.username, author.username) -> call.respond(individualKweetFTLFollowing(htmlKweet, "", loggedInUser, ProfileLocation.createPath(loggedInUser.username)))
+                CheckFollow.follows(loggedInUser.username, author.username) ->
+                    call.respond(individualKweetFTLFollowing(htmlKweet, UnfollowLocation.createPath(author.username), loggedInUser, ProfileLocation.createPath(loggedInUser.username)))
                 // Kweet of someone one does not follow
-                else -> call.respond(individualKweetFTLNotFollowing(htmlKweet, FollowLocation.createPath(author.username), loggedInUser, ProfileLocation.createPath(loggedInUser.username)))
+                else ->
+                    call.respond(individualKweetFTLNotFollowing(htmlKweet, FollowLocation.createPath(author.username), loggedInUser, ProfileLocation.createPath(loggedInUser.username)))
             }
         } else {
             call.respond(individualKweetFTLGuest(htmlKweet))

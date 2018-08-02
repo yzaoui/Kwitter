@@ -18,7 +18,7 @@ fun Route.profile() {
         val user = UserRepository.get(profileLocation.username)
 
         if (user == null) {
-            call.respondRedirect(IndexLocation.path)
+            call.respondRedirect(IndexLocation.PATH)
             return@get
         }
 

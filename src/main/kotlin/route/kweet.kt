@@ -28,7 +28,7 @@ fun Route.kweet() {
 
         // In case of invalid submission, return to homepage
         if (newKweetText == null || newKweetText.length !in 1..MAX_KWEET_LENGTH) {
-            call.respondRedirect(IndexLocation.path)
+            call.respondRedirect(IndexLocation.PATH)
             return@post
         }
 
@@ -41,6 +41,6 @@ fun Route.kweet() {
         }
 
         KweetRepository.create(user.username, transformedKweetText)
-        call.respondRedirect(IndexLocation.path)
+        call.respondRedirect(IndexLocation.PATH)
     }
 }
