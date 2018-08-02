@@ -6,7 +6,7 @@ import kwitter.data.model.Kweet
 object ListUserKweets {
     private val kweetRepo = KweetRepository
 
-    fun getKweets(username: String): Iterable<Kweet> {
-        return kweetRepo.getAllFrom(username)
+    fun getKweetsInReverseChronologicalOrder(username: String): Iterable<Kweet> {
+        return kweetRepo.getAllFrom(username).sortedByDescending { it.date }
     }
 }

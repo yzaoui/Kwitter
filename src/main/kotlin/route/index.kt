@@ -3,15 +3,16 @@ package kwitter.route
 import io.ktor.application.call
 import io.ktor.locations.get
 import io.ktor.response.respond
+import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kwitter.KwitterSession
 import kwitter.MAX_KWEET_LENGTH
 import kwitter.USERNAME_REGEX
-import kwitter.data.KweetRepository
 import kwitter.data.UserRepository
 import kwitter.data.model.Kweet
+import kwitter.domain.usecase.ListHomeKweets
 import kwitter.freemarker.HTMLKweet
 import kwitter.freemarker.homeFTL
 import kwitter.freemarker.welcomeFTL
@@ -20,8 +21,8 @@ import kwitter.location.*
 
 fun Route.index() {
     get<IndexLocation> {
-        val user = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
-        if (user == null) {
+        val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+        if (loggedInUser == null) {
             call.respond(welcomeFTL(
                 signUpHref = href(SignUpLocation()),
                 loginHref = href(LoginLocation())
@@ -29,16 +30,22 @@ fun Route.index() {
             return@get
         }
 
-        val htmlKweets = KweetRepository.getAll()
+        val kweetsFollowing = ListHomeKweets.getKweetsInReverseChronologicalOrder(loggedInUser.username)
+        if (kweetsFollowing == null) {
+            call.respondRedirect(href(IndexLocation()))
+            return@get
+        }
+
+        val htmlKweets = kweetsFollowing
             .map { it.toHTMLKweet(UserRepository, { username, kweetId -> href(IndividualKweetLocation(username, kweetId)) }, { username -> href(ProfileLocation(username)) }) }
 
         call.respond(homeFTL(
-            loggedInUser = user,
+            loggedInUser = loggedInUser,
             logoutHref = href(LogoutLocation()),
             newKweetHref = href(NewKweetLocation()),
             maxKweetLength = MAX_KWEET_LENGTH,
             htmlKweets = htmlKweets,
-            profileURL = href(ProfileLocation(user.username))
+            profileURL = href(ProfileLocation(loggedInUser.username))
         ))
     }
 }

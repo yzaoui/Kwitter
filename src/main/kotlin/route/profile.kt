@@ -25,7 +25,7 @@ fun Route.profile() {
         }
 
         val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
-        val htmlKweets = ListUserKweets.getKweets(user.username)
+        val htmlKweets = ListUserKweets.getKweetsInReverseChronologicalOrder(user.username)
             .map {
                 it.toHTMLKweet(UserRepository, { username, kweetId ->  href(IndividualKweetLocation(username, kweetId)) }, { username -> href(ProfileLocation(username)) })
             }
