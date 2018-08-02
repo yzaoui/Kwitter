@@ -41,11 +41,11 @@ fun Route.index() {
 
         call.respond(homeFTL(
             loggedInUser = loggedInUser,
-            logoutHref = href(LogoutLocation()),
+            loggedInUserURL = href(ProfileLocation(loggedInUser.username)),
+            logoutURL = href(LogoutLocation()),
             newKweetHref = href(NewKweetLocation()),
             maxKweetLength = MAX_KWEET_LENGTH,
-            htmlKweets = htmlKweets,
-            profileURL = href(ProfileLocation(loggedInUser.username))
+            htmlKweets = htmlKweets
         ))
     }
 }

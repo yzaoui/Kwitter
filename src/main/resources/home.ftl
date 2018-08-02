@@ -1,9 +1,9 @@
 <#-- @ftlvariable name="loggedInUser" type="kwitter.data.model.User" -->
-<#-- @ftlvariable name="logoutHref" type="String" -->
+<#-- @ftlvariable name="loggedInUserURL" type="String" -->
+<#-- @ftlvariable name="logoutURL" type="String" -->
 <#-- @ftlvariable name="newKweetHref" type="String" -->
 <#-- @ftlvariable name="maxKweetLength" type="Integer" -->
 <#-- @ftlvariable name="htmlKweets" type="kotlin.collections.List<kwitter.freemarker.HTMLKweet>" -->
-<#-- @ftlvariable name="profileURL" type="String" -->
 <#import "macros/main.ftl" as main />
 <#import "macros/nav.ftl" as nav />
 <#import "macros/kweet-list.ftl" as kweetList>
@@ -12,12 +12,7 @@
 <@main.body>
 <@nav.main>
 <@nav.items>
-<a href="${profileURL}" style="margin-right: 16px">
-    <img src="${loggedInUser.profilePictureURL}" alt="Profile picture" style="width: 40px; height: 40px">
-</a>
-<form class="form-inline mt-2 mt-md-0" action="${logoutHref}" method="post" enctype="application/x-www-form-urlencoded">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out</button>
-</form>
+<@nav.nonguest loggedInUser=loggedInUser loggedInUserURL=loggedInUserURL logoutURL=logoutURL />
 </@nav.items>
 </@nav.main>
 <main class="timeline-main">

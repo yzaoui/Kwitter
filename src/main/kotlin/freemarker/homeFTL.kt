@@ -3,15 +3,15 @@ package kwitter.freemarker
 import io.ktor.freemarker.FreeMarkerContent
 import kwitter.data.model.User
 
-fun homeFTL(loggedInUser: User, logoutHref: String, newKweetHref: String, maxKweetLength: Int, htmlKweets: List<HTMLKweet>, profileURL: String) = FreeMarkerContent(
+fun homeFTL(loggedInUser: User, loggedInUserURL: String, logoutURL: String, newKweetHref: String, maxKweetLength: Int, htmlKweets: List<HTMLKweet>) = FreeMarkerContent(
     template = "home.ftl",
     model = mapOf(
         "loggedInUser" to loggedInUser,
-        "logoutHref" to logoutHref,
+        "loggedInUserURL" to loggedInUserURL,
+        "logoutURL" to logoutURL,
         "newKweetHref" to newKweetHref,
         "maxKweetLength" to maxKweetLength,
-        "htmlKweets" to htmlKweets,
-        "profileURL" to profileURL
+        "htmlKweets" to htmlKweets
     )
 )
 

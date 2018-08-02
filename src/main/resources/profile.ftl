@@ -10,27 +10,22 @@
 <@main.html>
 <@main.head title="${user.displayName} (@${user.username})" />
 <@main.body>
-<@nav.main>
-    <@nav.items>
-    <#if loggedInUser??>
-    <a href="${loggedInUserURL}" style="margin-right: 16px">
-        <img src="${loggedInUser.profilePictureURL}" alt="Profile picture" style="width: 40px; height: 40px">
-    </a>
-    <form class="form-inline mt-2 mt-md-0" action="${logoutURL}" method="post" enctype="application/x-www-form-urlencoded">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out</button>
-    </form>
-    <#else>
-    <@nav.login loginURL=loginURL />
-    </#if>
-    </@nav.items>
-</@nav.main>
-<main role="main" class="timeline-main">
-    <section>
-        <h1>${user.displayName} @${user.username}</h1>
-    </section>
-    <div>
-        <@kweetList.kweet_list htmlKweets=htmlKweets />
-    </div>
-</main>
+    <@nav.main>
+        <@nav.items>
+            <#if loggedInUser??>
+            <@nav.nonguest loggedInUser=loggedInUser loggedInUserURL=loggedInUserURL logoutURL=logoutURL />
+            <#else>
+            <@nav.login loginURL=loginURL />
+            </#if>
+        </@nav.items>
+    </@nav.main>
+    <main role="main" class="timeline-main">
+        <section>
+            <h1>${user.displayName} @${user.username}</h1>
+        </section>
+        <div>
+            <@kweetList.kweet_list htmlKweets=htmlKweets />
+        </div>
+    </main>
 </@main.body>
 </@main.html>

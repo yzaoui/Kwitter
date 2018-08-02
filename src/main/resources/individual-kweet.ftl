@@ -11,28 +11,23 @@
 <@main.html>
 <@main.head title="${htmlKweet.authorDisplayName}: \"${htmlKweet.text}\"" />
 <@main.body>
-<@nav.main>
-<@nav.items>
-    <#if loggedInUser??>
-    <a href="${loggedInUserURL}" style="margin-right: 16px">
-        <img src="${loggedInUser.profilePictureURL}" alt="Profile picture" style="width: 40px; height: 40px">
-    </a>
-    <form class="form-inline mt-2 mt-md-0" action="${logoutURL}" method="post" enctype="application/x-www-form-urlencoded">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out</button>
-    </form>
-    <#else>
-    <@nav.login loginURL=loginURL />
-    </#if>
-</@nav.items>
-</@nav.main>
-<main class="ikweet-main">
-    <#if followURL??>
-    <@kweetList.kweet_individual_follow htmlKweet=htmlKweet followURL=followURL/>
-    <#elseif unfollowURL??>
-    <@kweetList.kweet_individual_unfollow htmlKweet=htmlKweet unfollowURL=unfollowURL/>
-    <#else>
-    <@kweetList.kweet_individual htmlKweet=htmlKweet/>
-    </#if>
-</main>
+    <@nav.main>
+        <@nav.items>
+            <#if loggedInUser??>
+            <@nav.nonguest loggedInUser=loggedInUser loggedInUserURL=loggedInUserURL logoutURL=logoutURL />
+            <#else>
+            <@nav.login loginURL=loginURL />
+            </#if>
+        </@nav.items>
+    </@nav.main>
+    <main class="ikweet-main">
+        <#if followURL??>
+        <@kweetList.kweet_individual_follow htmlKweet=htmlKweet followURL=followURL/>
+        <#elseif unfollowURL??>
+        <@kweetList.kweet_individual_unfollow htmlKweet=htmlKweet unfollowURL=unfollowURL/>
+        <#else>
+        <@kweetList.kweet_individual htmlKweet=htmlKweet/>
+        </#if>
+    </main>
 </@main.body>
 </@main.html>
