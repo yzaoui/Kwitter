@@ -1,7 +1,9 @@
 <#macro main>
 <nav class="navbar navbar-expand navbar-dark bg-dark mb-4">
-    <a class="navbar-brand" href="/">Kwitter</a>
-    <#nested />
+    <div class="container">
+        <a class="navbar-brand" href="/">Kwitter</a>
+        <#nested />
+    </div>
 </nav>
 </#macro>
 
@@ -28,10 +30,16 @@
 <#-- @ftlvariable name="loggedInUser" type="kwitter.data.model.User" -->
 <#-- @ftlvariable name="loggedInUserURL" type="String" -->
 <#-- @ftlvariable name="logoutURL" type="String" -->
-<a href="${loggedInUserURL}" style="margin-right: 16px">
-    <img src="${loggedInUser.profilePictureURL}" alt="Profile picture" style="width: 40px; height: 40px">
-</a>
-<form class="form-inline mt-2 mt-md-0" action="${logoutURL}" method="post" enctype="application/x-www-form-urlencoded">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out</button>
-</form>
+<div class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="${loggedInUserURL}">
+        <img src="${loggedInUser.profilePictureURL}" alt="Profile picture" style="width: 40px; height: 40px">
+    </a>
+    <ul class="dropdown-menu dropdown-menu-right">
+        <li>
+            <form class="form-inline mt-2 mt-md-0" action="${logoutURL}" method="post" enctype="application/x-www-form-urlencoded">
+                <button class="btn dropdown-item" type="submit">Log out</button>
+            </form>
+        </li>
+    </ul>
+</div>
 </#macro>

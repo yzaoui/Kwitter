@@ -163,3 +163,8 @@ body {
     font-size: 13px;
     color: #8899a6;
 }
+
+.dropdown-item:hover {
+    background-color: #0084B4;
+    color: #FFFFFF;
+}
