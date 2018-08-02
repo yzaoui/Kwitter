@@ -12,12 +12,13 @@ import io.ktor.sessions.set
 import kwitter.KwitterSession
 import kwitter.data.UserRepository
 import kwitter.freemarker.loginFTL
+import kwitter.href
 import kwitter.location.IndexLocation
 import kwitter.location.LoginLocation
 
 fun Route.login() {
     get<LoginLocation> {
-        call.respond(loginFTL(loginHref = LoginLocation.PATH))
+        call.respond(loginFTL(loginHref = href(LoginLocation())))
     }
     post<LoginLocation> {
         val params = call.receiveParameters()
@@ -30,20 +31,26 @@ fun Route.login() {
             val user = UserRepository.get(usernameParam)
             if (passwordParam == user?.passwordHash) {
                 call.sessions.set(KwitterSession(user.username))
-                call.respondRedirect(IndexLocation.PATH)
+                call.respondRedirect(href(IndexLocation()))
             } else {
-                call.respond(loginPageWithError("Incorrect username and/or password."))
+                call.respond(loginPageWithError(
+                    loginURL = href(LoginLocation()),
+                    errorMessage = "Incorrect username and/or password."
+                ))
             }
         } else {
             if (usernameParam == null) errorMessages.add("Missing username.")
             if (passwordParam == null) errorMessages.add("Missing password.")
 
-            call.respond(loginPageWithError(errorMessage = errorMessages.joinToString("<br>")))
+            call.respond(loginPageWithError(
+                loginURL = href(LoginLocation()),
+                errorMessage = errorMessages.joinToString("<br>")
+            ))
         }
     }
 }
 
-private fun loginPageWithError(errorMessage: String) = loginFTL(
-    loginHref = LoginLocation.PATH,
+private fun loginPageWithError(loginURL: String, errorMessage: String) = loginFTL(
+    loginHref = loginURL,
     errorMessage = errorMessage
 )

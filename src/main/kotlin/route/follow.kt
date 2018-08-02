@@ -9,6 +9,7 @@ import io.ktor.sessions.sessions
 import kwitter.KwitterSession
 import kwitter.data.UserRepository
 import kwitter.domain.usecase.FollowUser
+import kwitter.href
 import kwitter.location.FollowLocation
 import kwitter.location.LoginLocation
 import kwitter.location.ProfileLocation
@@ -17,11 +18,11 @@ fun Route.follow() {
     post<FollowLocation> { followLocation ->
         val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
         if (loggedInUser == null) {
-            call.respondRedirect(LoginLocation.PATH)
+            call.respondRedirect(href(LoginLocation()))
             return@post
         }
 
         FollowUser.follow(loggedInUser.username, followLocation.username)
-        call.respondRedirect(ProfileLocation.createPath(followLocation.username))
+        call.respondRedirect(href(ProfileLocation(followLocation.username)))
     }
 }

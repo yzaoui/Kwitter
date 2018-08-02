@@ -11,15 +11,16 @@ import kwitter.KwitterSession
 import kwitter.MAX_KWEET_LENGTH
 import kwitter.data.KweetRepository
 import kwitter.data.UserRepository
+import kwitter.href
 import kwitter.location.IndexLocation
-import kwitter.location.KweetLocation
 import kwitter.location.LoginLocation
+import kwitter.location.NewKweetLocation
 
 fun Route.kweet() {
-    post<KweetLocation> {
+    post<NewKweetLocation> {
         val user = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
         if (user == null) {
-            call.respondRedirect(LoginLocation.PATH)
+            call.respondRedirect(href(LoginLocation()))
             return@post
         }
 
@@ -28,7 +29,7 @@ fun Route.kweet() {
 
         // In case of invalid submission, return to homepage
         if (newKweetText == null || newKweetText.length !in 1..MAX_KWEET_LENGTH) {
-            call.respondRedirect(IndexLocation.PATH)
+            call.respondRedirect(href(IndexLocation()))
             return@post
         }
 
@@ -41,6 +42,6 @@ fun Route.kweet() {
         }
 
         KweetRepository.create(user.username, transformedKweetText)
-        call.respondRedirect(IndexLocation.PATH)
+        call.respondRedirect(href(IndexLocation()))
     }
 }

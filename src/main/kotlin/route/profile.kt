@@ -12,21 +12,28 @@ import kwitter.data.UserRepository
 import kwitter.domain.usecase.ListUserKweets
 import kwitter.freemarker.profileFTL
 import kwitter.freemarker.profileFTLGuest
-import kwitter.location.IndexLocation
-import kwitter.location.ProfileLocation
+import kwitter.href
+import kwitter.location.*
 
 fun Route.profile() {
     get<ProfileLocation> { profileLocation ->
         val user = UserRepository.get(profileLocation.username)
 
         if (user == null) {
-            call.respondRedirect(IndexLocation.PATH)
+            call.respondRedirect(href(IndexLocation()))
             return@get
         }
 
         val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
-        val htmlKweets = ListUserKweets.getKweets(user.username).map { it.toHTMLKweet(UserRepository) }
+        val htmlKweets = ListUserKweets.getKweets(user.username)
+            .map {
+                it.toHTMLKweet(UserRepository, { username, kweetId ->  href(IndividualKweetLocation(username, kweetId)) }, { username -> href(ProfileLocation(username)) })
+            }
 
-        call.respond(if (loggedInUser != null) profileFTL(user, htmlKweets, loggedInUser, ProfileLocation.createPath(loggedInUser.username)) else profileFTLGuest(user, htmlKweets))
+        if (loggedInUser != null) {
+            call.respond(profileFTL(user, htmlKweets, href(LogoutLocation()), loggedInUser, href(ProfileLocation(loggedInUser.username))))
+        } else {
+            call.respond(profileFTLGuest(user, htmlKweets, href(LoginLocation())))
+        }
     }
 }

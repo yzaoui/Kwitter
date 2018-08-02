@@ -2,6 +2,8 @@ package kwitter
 
 import freemarker.cache.ClassTemplateLoader
 import io.ktor.application.Application
+import io.ktor.application.ApplicationCall
+import io.ktor.application.application
 import io.ktor.application.install
 import io.ktor.content.resources
 import io.ktor.content.static
@@ -9,6 +11,10 @@ import io.ktor.features.CallLogging
 import io.ktor.features.DefaultHeaders
 import io.ktor.freemarker.FreeMarker
 import io.ktor.locations.Locations
+import io.ktor.locations.locations
+import io.ktor.pipeline.PipelineContext
+import io.ktor.routing.Route
+import io.ktor.routing.application
 import io.ktor.routing.routing
 import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
@@ -50,3 +56,6 @@ fun Application.main() {
         }
     }
 }
+
+fun Route.href(location: Any) = application.locations.href(location)
+fun PipelineContext<Unit, ApplicationCall>.href(location: Any) = application.locations.href(location)

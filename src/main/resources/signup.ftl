@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="SIGN_UP_HREF" type="String" -->
+<#-- @ftlvariable name="signUpURL" type="String" -->
 <#-- @ftlvariable name="USERNAME_REGEX" type="String" -->
 <#-- @ftlvariable name="errorMessage" type="String" -->
 <#import "macros/main.ftl" as main />
@@ -7,7 +7,7 @@
 <@main.head title="Sign Up" />
 <@main.body>
 <@nav.main />
-<form class="centered-form" action="${SIGN_UP_HREF}" method="post" enctype="application/x-www-form-urlencoded">
+<form class="centered-form" action="${signUpURL}" method="post" enctype="application/x-www-form-urlencoded">
     <h1 class="h3 mb-3 font-weight-normal text-center">Create your account</h1>
     <#if errorMessage??>
     <div class="alert alert-danger" role="alert">${errorMessage}</div>

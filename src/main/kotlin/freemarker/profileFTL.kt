@@ -2,24 +2,22 @@ package kwitter.freemarker
 
 import io.ktor.freemarker.FreeMarkerContent
 import kwitter.data.model.User
-import kwitter.location.LoginLocation
-import kwitter.location.LogoutLocation
 
-fun profileFTLGuest(user: User, htmlKweets: List<HTMLKweet>) = FreeMarkerContent(
+fun profileFTLGuest(user: User, htmlKweets: List<HTMLKweet>, loginURL: String) = FreeMarkerContent(
     template = "profile.ftl",
     model = mapOf(
         "user" to user,
         "htmlKweets" to htmlKweets,
-        "loginHref" to LoginLocation.PATH
+        "loginURL" to loginURL
     )
 )
 
-fun profileFTL(user: User, htmlKweets: List<HTMLKweet>, loggedInUser: User, loggedInUserURL: String) = FreeMarkerContent(
+fun profileFTL(user: User, htmlKweets: List<HTMLKweet>, logoutURL: String, loggedInUser: User, loggedInUserURL: String) = FreeMarkerContent(
     template = "profile.ftl",
     model = mapOf(
         "user" to user,
         "htmlKweets" to htmlKweets,
-        "logoutHref" to LogoutLocation.PATH,
+        "logoutURL" to logoutURL,
         "loggedInUser" to loggedInUser,
         "loggedInUserURL" to loggedInUserURL
     )

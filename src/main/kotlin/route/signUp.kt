@@ -14,12 +14,14 @@ import kwitter.USERNAME_REGEX
 import kwitter.data.UserRepository
 import kwitter.data.model.User
 import kwitter.freemarker.signupFTL
+import kwitter.freemarker.signupFTLError
+import kwitter.href
 import kwitter.location.IndexLocation
 import kwitter.location.SignUpLocation
 
 fun Route.signUp() {
     get<SignUpLocation> {
-        call.respond(signupFTL())
+        call.respond(signupFTL(href(SignUpLocation())))
     }
     post<SignUpLocation> {
         val params = call.receiveParameters()
@@ -41,7 +43,7 @@ fun Route.signUp() {
             )
             UserRepository.create(newUser)
             call.sessions.set(KwitterSession(newUser.username))
-            call.respondRedirect(IndexLocation.PATH)
+            call.respondRedirect(href(IndexLocation()))
         } else {
             if (usernameParam == null) errorMessages.add("Missing username.")
             else if (!usernameValid) errorMessages.add("Username must consist of 1-15 letters, numbers, and/or underscores.")
@@ -49,8 +51,9 @@ fun Route.signUp() {
             if (displayNameParam == null) errorMessages.add("Missing display name.")
             if (emailParam == null) errorMessages.add("Missing email.")
 
-            call.respond(signupFTL(
-                errorMessage = errorMessages.joinToString("<br>")
+            call.respond(signupFTLError(
+                errorMessage = errorMessages.joinToString("<br>"),
+                signUpURL = href(SignUpLocation())
             ))
         }
     }
