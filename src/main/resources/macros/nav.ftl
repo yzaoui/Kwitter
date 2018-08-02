@@ -10,8 +10,7 @@
     <span class="navbar-toggler-icon"></span>
 </button>
 <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto">
-    </ul>
+    <ul class="navbar-nav mr-auto"></ul>
     <#nested />
 </div>
 </#macro>

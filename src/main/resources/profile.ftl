@@ -28,7 +28,7 @@
     </#if>
     </@nav.items>
 </@nav.main>
-<main role="main">
+<main role="main" class="timeline-main">
     <section>
         <h1>${user.displayName} @${user.username}</h1>
     </section>
