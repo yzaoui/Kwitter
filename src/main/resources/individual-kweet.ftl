@@ -1,4 +1,6 @@
 <#-- @ftlvariable name="htmlKweet" type="kwitter.freemarker.HTMLKweet" -->
+<#-- @ftlvariable name="followURL" type="String" -->
+<#-- @ftlvariable name="unfollowURL" type="String" -->
 <#-- @ftlvariable name="loginHref" type="String" -->
 <#-- @ftlvariable name="loggedInUser" type="kwitter.data.model.User" -->
 <#-- @ftlvariable name="loggedInUserURL" type="String" -->
@@ -28,7 +30,13 @@
     </@nav.items>
 </@nav.main>
 <main class="ikweet-main">
+    <#if followURL??>
+    <@kweetList.kweet_individual_follow htmlKweet=htmlKweet followURL=followURL/>
+    <#elseif unfollowURL??>
+    <@kweetList.kweet_individual_unfollow htmlKweet=htmlKweet unfollowURL=unfollowURL/>
+    <#else>
     <@kweetList.kweet_individual htmlKweet=htmlKweet/>
+    </#if>
 </main>
 </@main.body>
 </@main.html>

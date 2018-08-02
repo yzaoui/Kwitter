@@ -5,5 +5,6 @@ data class User(
     val passwordHash: String,
     val displayName: String,
     val email: String,
-    val profilePictureURL: String
+    val profilePictureURL: String,
+    val follows: MutableSet<String> = mutableSetOf()
 )

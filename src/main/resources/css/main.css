@@ -146,6 +146,10 @@ body {
     color: #8899a6;
 }
 
+.ikweet-author-follow {
+    margin-left: auto;
+}
+
 .ikweet-content {
     font-size: 28px;
     white-space: pre-wrap;

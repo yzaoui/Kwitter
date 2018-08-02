@@ -38,6 +38,7 @@ fun Application.main() {
         kweet()
         profile()
         individualKweet()
+        follow()
         static("assets") {
             static("css") {
                 resources("css")

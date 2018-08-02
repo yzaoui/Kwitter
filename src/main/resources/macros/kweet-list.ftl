@@ -36,6 +36,7 @@
             <strong class="ikweet-author-display-name">${htmlKweet.authorDisplayName}</strong>
             <span class="ikweet-author-username">@${htmlKweet.authorUsername}</span>
         </a>
+        <#nested />
     </div>
     <div class="ikweet-body">
         <p class="ikweet-content">${htmlKweet.html}</p>
@@ -44,4 +45,29 @@
         <span class="ikweet-time">${htmlKweet.dateText}</span>
     </div>
 </div>
+</#macro>
+
+
+<#macro kweet_individual_follow htmlKweet followURL>
+<#-- @ftlvariable name="htmlKweet" type="kwitter.freemarker.HTMLKweet" -->
+<#-- @ftlvariable name="followURL" type="String" -->
+<@kweet_individual htmlKweet=htmlKweet>
+<div class="ikweet-author-follow">
+    <form action="${followURL}" method="post" enctype="application/x-www-form-urlencoded">
+        <button class="btn btn-primary" type="submit">Follow</button>
+    </form>
+</div>
+</@kweet_individual>
+</#macro>
+
+<#macro kweet_individual_unfollow htmlKweet unfollowURL>
+<#-- @ftlvariable name="htmlKweet" type="kwitter.freemarker.HTMLKweet" -->
+<#-- @ftlvariable name="unfollowURL" type="String" -->
+<@kweet_individual htmlKweet=htmlKweet>
+<div class="ikweet-author-follow">
+    <form action="${unfollowURL}" method="post" enctype="application/x-www-form-urlencoded">
+        <button class="btn btn-primary" type="submit">Unfollow</button>
+    </form>
+</div>
+</@kweet_individual>
 </#macro>
