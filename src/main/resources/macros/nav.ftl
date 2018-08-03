@@ -36,7 +36,11 @@
     </a>
     <ul class="dropdown-menu dropdown-menu-right">
         <li>
-            <form class="form-inline mt-2 mt-md-0" action="${logoutURL}" method="post" enctype="application/x-www-form-urlencoded">
+            <a class="btn dropdown-item" href="${loggedInUserURL}">Profile</a>
+        </li>
+        <li class="dropdown-divider"></li>
+        <li>
+            <form action="${logoutURL}" method="post" enctype="application/x-www-form-urlencoded">
                 <button class="btn dropdown-item" type="submit">Log out</button>
             </form>
         </li>

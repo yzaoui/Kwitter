@@ -18,6 +18,14 @@ body {
     margin-bottom: 10px;
 }
 
+.dropdown-divider {
+    margin: .2rem 0;
+}
+
+.dropdown-menu .btn {
+    border-radius: 0;
+}
+
 .new-kweet-form {
     overflow: auto;
     margin-bottom: 10px;
