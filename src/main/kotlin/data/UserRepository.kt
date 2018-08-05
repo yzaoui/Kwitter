@@ -17,4 +17,6 @@ object UserRepository {
     fun get(username: String): User? {
         return users[username]
     }
+
+    fun getUsernames(): Set<String> = users.keys
 }

@@ -14,6 +14,7 @@ import kwitter.KwitterSession
 import kwitter.USERNAME_REGEX
 import kwitter.data.UserRepository
 import kwitter.data.model.User
+import kwitter.domain.usecase.UsernameAvailability
 import kwitter.freemarker.signupFTL
 import kwitter.freemarker.signupFTLError
 import kwitter.href
@@ -25,17 +26,18 @@ fun Route.signUp() {
     get<SignUpLocation> {
         call.respond(signupFTL(href(SignUpLocation())))
     }
-    post<SignUpLocation> {
+    post<SignUpLocation> { signUpLocation ->
         val params = call.receiveParameters()
         val errorMessages = mutableListOf<String>()
 
         val usernameParam = params["username"]
         val usernameValid = usernameParam?.matches(USERNAME_REGEX.toRegex()) ?: false
+        val usernameAvailable = usernameParam?.let { UsernameAvailability.check(it) } ?: false
         val passwordParam = params["password"] //TODO: Handle password better
         val displayNameParam = params["displayName"]
         val emailParam = params["email"]
 
-        if (usernameParam != null && usernameValid && passwordParam != null && displayNameParam != null && emailParam != null) {
+        if (usernameParam != null && usernameValid && usernameAvailable && passwordParam != null && displayNameParam != null && emailParam != null) {
             val newUser = User(
                 username = usernameParam,
                 passwordHash = passwordParam,
@@ -49,6 +51,7 @@ fun Route.signUp() {
         } else {
             if (usernameParam == null) errorMessages.add("Missing username.")
             else if (!usernameValid) errorMessages.add("Username must consist of 1-15 letters, numbers, and/or underscores.")
+            else if (!usernameAvailable) errorMessages.add("Username is unavailable.")
             if (passwordParam == null) errorMessages.add("Missing password.")
             if (displayNameParam == null) errorMessages.add("Missing display name.")
             if (emailParam == null) errorMessages.add("Missing email.")
