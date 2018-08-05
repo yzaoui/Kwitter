@@ -52,6 +52,9 @@ fun Application.main() {
             static("css") {
                 resources("css")
             }
+            static("js") {
+                resources("js")
+            }
             static("images") {
                 resources("images")
                 static("user") {
