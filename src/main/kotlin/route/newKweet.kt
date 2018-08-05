@@ -19,8 +19,8 @@ class NewKweetLocation
 
 fun Route.newKweet() {
     post<NewKweetLocation> {
-        val user = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
-        if (user == null) {
+        val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+        if (loggedInUser == null) {
             call.respondRedirect(href(LoginLocation()))
             return@post
         }
@@ -42,7 +42,7 @@ fun Route.newKweet() {
             Regex("\\n{3,}").replace(it, "\n\n")
         }
 
-        KweetRepository.create(user.username, transformedKweetText)
+        KweetRepository.create(loggedInUser.username, transformedKweetText)
         call.respondRedirect(href(IndexLocation()))
     }
 }

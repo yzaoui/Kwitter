@@ -4,6 +4,7 @@
 <#-- @ftlvariable name="newKweetHref" type="String" -->
 <#-- @ftlvariable name="maxKweetLength" type="Integer" -->
 <#-- @ftlvariable name="htmlKweets" type="kotlin.collections.List<kwitter.freemarker.HTMLKweet>" -->
+<#-- @ftlvariable name="generateAvatarURL" type="String" -->
 <#import "macros/main.ftl" as main />
 <#import "macros/nav.ftl" as nav />
 <#import "macros/kweet-list.ftl" as kweetList>
@@ -12,7 +13,7 @@
 <@main.body>
 <@nav.main>
 <@nav.items>
-<@nav.nonguest loggedInUser=loggedInUser loggedInUserURL=loggedInUserURL logoutURL=logoutURL />
+<@nav.nonguest loggedInUser=loggedInUser loggedInUserURL=loggedInUserURL logoutURL=logoutURL generateAvatarURL=generateAvatarURL />
 </@nav.items>
 </@nav.main>
 <main class="timeline-main">

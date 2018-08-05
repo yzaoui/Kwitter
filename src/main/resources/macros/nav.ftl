@@ -26,10 +26,11 @@
 </form>
 </#macro>
 
-<#macro nonguest loggedInUser loggedInUserURL logoutURL>
+<#macro nonguest loggedInUser loggedInUserURL logoutURL generateAvatarURL>
 <#-- @ftlvariable name="loggedInUser" type="kwitter.data.model.User" -->
 <#-- @ftlvariable name="loggedInUserURL" type="String" -->
 <#-- @ftlvariable name="logoutURL" type="String" -->
+<#-- @ftlvariable name="generateAvatarURL" type="String" -->
 <div class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="${loggedInUserURL}">
         <img src="${loggedInUser.profilePictureURL}" alt="Profile picture" style="width: 40px; height: 40px">
@@ -37,6 +38,9 @@
     <ul class="dropdown-menu dropdown-menu-right">
         <li>
             <a class="btn dropdown-item" href="${loggedInUserURL}">Profile</a>
+        </li>
+        <li>
+            <a class="btn dropdown-item" href="${generateAvatarURL}">Generate Avatar</a>
         </li>
         <li class="dropdown-divider"></li>
         <li>

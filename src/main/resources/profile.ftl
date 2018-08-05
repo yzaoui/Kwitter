@@ -4,6 +4,7 @@
 <#-- @ftlvariable name="loggedInUser" type="kwitter.data.model.User" -->
 <#-- @ftlvariable name="loggedInUserURL" type="String" -->
 <#-- @ftlvariable name="logoutURL" type="String" -->
+<#-- @ftlvariable name="generateAvatarURL" type="String" -->
 <#import "macros/main.ftl" as main />
 <#import "macros/nav.ftl" as nav />
 <#import "macros/kweet-list.ftl" as kweetList>
@@ -13,7 +14,7 @@
     <@nav.main>
         <@nav.items>
             <#if loggedInUser??>
-            <@nav.nonguest loggedInUser=loggedInUser loggedInUserURL=loggedInUserURL logoutURL=logoutURL />
+            <@nav.nonguest loggedInUser=loggedInUser loggedInUserURL=loggedInUserURL logoutURL=logoutURL generateAvatarURL=generateAvatarURL />
             <#else>
             <@nav.login loginURL=loginURL />
             </#if>

@@ -38,14 +38,31 @@ fun Route.individualKweet() {
         if (loggedInUser != null) {
             when {
                 // One's own kweet
-                loggedInUser.username == author.username ->
-                    call.respond(individualKweetFTL(htmlKweet, loggedInUser, href(ProfileLocation(loggedInUser.username)), href(LogoutLocation())))
+                loggedInUser.username == author.username -> call.respond(individualKweetFTL(
+                    htmlKweet = htmlKweet,
+                    loggedInUser = loggedInUser,
+                    loggedInUserURL = href(ProfileLocation(loggedInUser.username)),
+                    logoutURL = href(LogoutLocation()),
+                    generateAvatarURL = href(GenerateAvatarLocation())
+                ))
                 // Kweet of someone one follows
-                CheckFollow.follows(loggedInUser.username, author.username) ->
-                    call.respond(individualKweetFTLFollowing(htmlKweet, href(UnfollowLocation(author.username)), loggedInUser, href(ProfileLocation(loggedInUser.username)), href(LogoutLocation())))
+                CheckFollow.follows(loggedInUser.username, author.username) -> call.respond(individualKweetFTLFollowing(
+                    htmlKweet = htmlKweet,
+                    unfollowURL = href(UnfollowLocation(author.username)),
+                    loggedInUser = loggedInUser,
+                    loggedInUserURL = href(ProfileLocation(loggedInUser.username)),
+                    logoutURL = href(LogoutLocation()),
+                    generateAvatarURL = href(GenerateAvatarLocation())
+                ))
                 // Kweet of someone one does not follow
-                else ->
-                    call.respond(individualKweetFTLNotFollowing(htmlKweet, href(FollowLocation(author.username)), loggedInUser, href(ProfileLocation(loggedInUser.username)), href(LogoutLocation())))
+                else -> call.respond(individualKweetFTLNotFollowing(
+                    htmlKweet = htmlKweet,
+                    followURL = href(FollowLocation(author.username)),
+                    loggedInUser = loggedInUser,
+                    loggedInUserURL = href(ProfileLocation(loggedInUser.username)),
+                    logoutURL = href(LogoutLocation()),
+                    generateAvatarURL = href(GenerateAvatarLocation())
+                ))
             }
         } else {
             call.respond(individualKweetFTLGuest(htmlKweet, href(LoginLocation())))

@@ -34,7 +34,7 @@ fun Route.profile() {
             }
 
         if (loggedInUser != null) {
-            call.respond(profileFTL(user, htmlKweets, href(LogoutLocation()), loggedInUser, href(ProfileLocation(loggedInUser.username))))
+            call.respond(profileFTL(user, htmlKweets, href(LogoutLocation()), loggedInUser, href(ProfileLocation(loggedInUser.username)), generateAvatarURL = href(GenerateAvatarLocation())))
         } else {
             call.respond(profileFTLGuest(user, htmlKweets, href(LoginLocation())))
         }

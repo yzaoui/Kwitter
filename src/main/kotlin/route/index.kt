@@ -48,7 +48,8 @@ fun Route.index() {
             logoutURL = href(LogoutLocation()),
             newKweetHref = href(NewKweetLocation()),
             maxKweetLength = MAX_KWEET_LENGTH,
-            htmlKweets = htmlKweets
+            htmlKweets = htmlKweets,
+            generateAvatarURL = href(GenerateAvatarLocation())
         ))
     }
 }

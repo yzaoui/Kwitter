@@ -5,6 +5,7 @@ import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
 import io.ktor.application.application
 import io.ktor.application.install
+import io.ktor.content.files
 import io.ktor.content.resources
 import io.ktor.content.static
 import io.ktor.features.CallLogging
@@ -46,12 +47,16 @@ fun Application.main() {
         individualKweet()
         follow()
         unfollow()
+        generateAvatar()
         static("assets") {
             static("css") {
                 resources("css")
             }
             static("images") {
                 resources("images")
+                static("user") {
+                    files(environment.config.property("kwitter.avatar.dir").getString())
+                }
             }
         }
     }

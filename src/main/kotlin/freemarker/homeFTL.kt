@@ -3,7 +3,7 @@ package kwitter.freemarker
 import io.ktor.freemarker.FreeMarkerContent
 import kwitter.data.model.User
 
-fun homeFTL(loggedInUser: User, loggedInUserURL: String, logoutURL: String, newKweetHref: String, maxKweetLength: Int, htmlKweets: List<HTMLKweet>) = FreeMarkerContent(
+fun homeFTL(loggedInUser: User, loggedInUserURL: String, logoutURL: String, newKweetHref: String, maxKweetLength: Int, htmlKweets: List<HTMLKweet>, generateAvatarURL: String) = FreeMarkerContent(
     template = "home.ftl",
     model = mapOf(
         "loggedInUser" to loggedInUser,
@@ -11,7 +11,8 @@ fun homeFTL(loggedInUser: User, loggedInUserURL: String, logoutURL: String, newK
         "logoutURL" to logoutURL,
         "newKweetHref" to newKweetHref,
         "maxKweetLength" to maxKweetLength,
-        "htmlKweets" to htmlKweets
+        "htmlKweets" to htmlKweets,
+        "generateAvatarURL" to generateAvatarURL
     )
 )
 
