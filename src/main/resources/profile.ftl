@@ -21,9 +21,15 @@
         </@nav.items>
     </@nav.main>
     <main role="main" class="timeline-main">
-        <section>
-            <h1>${user.displayName} @${user.username}</h1>
-        </section>
+        <div class="profile-info-container">
+            <div class="profile-image">
+                <img class="profile-image" src="${user.profilePictureURL}">
+            </div>
+            <div class="profile-details">
+                <div class="profile-display-name"><h2>${user.displayName}</h2></div>
+                <div class="profile-username">@${user.username}</div>
+            </div>
+        </div>
         <div>
             <@kweetList.kweet_list htmlKweets=htmlKweets />
         </div>

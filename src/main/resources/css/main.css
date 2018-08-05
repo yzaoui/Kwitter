@@ -135,6 +135,33 @@ body {
     color: #0084B4;
 }
 
+/* User profile */
+
+.profile-info-container {
+    background: #FFFFFF;
+    padding: 20px;
+    display: inline-block;
+    width: 100%;
+}
+
+.profile-image {
+    float: left;
+}
+
+.profile-details {
+    margin-left: 10px;
+    float: left;
+}
+
+.profile-display-name > h2 {
+    margin-bottom: 0;
+}
+
+.profile-username {
+    font-size: 18px;
+    font-weight: bold;
+}
+
 /* Individual kweet page */
 
 .ikweet-main {
