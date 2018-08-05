@@ -1,6 +1,7 @@
 package kwitter.route
 
 import io.ktor.application.call
+import io.ktor.locations.Location
 import io.ktor.locations.get
 import io.ktor.locations.post
 import io.ktor.request.receiveParameters
@@ -13,8 +14,9 @@ import kwitter.KwitterSession
 import kwitter.data.UserRepository
 import kwitter.freemarker.loginFTL
 import kwitter.href
-import kwitter.location.IndexLocation
-import kwitter.location.LoginLocation
+
+@Location("/login")
+class LoginLocation
 
 fun Route.login() {
     get<LoginLocation> {

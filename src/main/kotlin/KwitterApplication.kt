@@ -41,7 +41,7 @@ fun Application.main() {
         login()
         logout()
         signUp()
-        kweet()
+        newKweet()
         profile()
         individualKweet()
         follow()

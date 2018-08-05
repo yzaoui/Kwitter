@@ -1,6 +1,7 @@
 package kwitter.route
 
 import io.ktor.application.call
+import io.ktor.locations.Location
 import io.ktor.locations.get
 import io.ktor.response.respond
 import io.ktor.response.respondRedirect
@@ -13,7 +14,9 @@ import kwitter.domain.usecase.ListUserKweets
 import kwitter.freemarker.profileFTL
 import kwitter.freemarker.profileFTLGuest
 import kwitter.href
-import kwitter.location.*
+
+@Location("/{username}")
+class ProfileLocation(val username: String)
 
 fun Route.profile() {
     get<ProfileLocation> { profileLocation ->

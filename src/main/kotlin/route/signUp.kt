@@ -1,6 +1,7 @@
 package kwitter.route
 
 import io.ktor.application.call
+import io.ktor.locations.Location
 import io.ktor.locations.get
 import io.ktor.locations.post
 import io.ktor.request.receiveParameters
@@ -16,8 +17,9 @@ import kwitter.data.model.User
 import kwitter.freemarker.signupFTL
 import kwitter.freemarker.signupFTLError
 import kwitter.href
-import kwitter.location.IndexLocation
-import kwitter.location.SignUpLocation
+
+@Location("/signup")
+class SignUpLocation
 
 fun Route.signUp() {
     get<SignUpLocation> {

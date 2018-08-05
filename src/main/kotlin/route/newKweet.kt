@@ -1,6 +1,7 @@
 package kwitter.route
 
 import io.ktor.application.call
+import io.ktor.locations.Location
 import io.ktor.locations.post
 import io.ktor.request.receiveParameters
 import io.ktor.response.respondRedirect
@@ -12,11 +13,11 @@ import kwitter.MAX_KWEET_LENGTH
 import kwitter.data.KweetRepository
 import kwitter.data.UserRepository
 import kwitter.href
-import kwitter.location.IndexLocation
-import kwitter.location.LoginLocation
-import kwitter.location.NewKweetLocation
 
-fun Route.kweet() {
+@Location("/new-kweet")
+class NewKweetLocation
+
+fun Route.newKweet() {
     post<NewKweetLocation> {
         val user = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
         if (user == null) {

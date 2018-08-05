@@ -1,6 +1,7 @@
 package kwitter.route
 
 import io.ktor.application.call
+import io.ktor.locations.Location
 import io.ktor.locations.get
 import io.ktor.response.respond
 import io.ktor.response.respondRedirect
@@ -17,7 +18,9 @@ import kwitter.freemarker.HTMLKweet
 import kwitter.freemarker.homeFTL
 import kwitter.freemarker.welcomeFTL
 import kwitter.href
-import kwitter.location.*
+
+@Location("/")
+class IndexLocation
 
 fun Route.index() {
     get<IndexLocation> {

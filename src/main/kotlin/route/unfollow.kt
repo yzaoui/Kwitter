@@ -1,6 +1,7 @@
 package kwitter.route
 
 import io.ktor.application.call
+import io.ktor.locations.Location
 import io.ktor.locations.post
 import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
@@ -10,9 +11,9 @@ import kwitter.KwitterSession
 import kwitter.data.UserRepository
 import kwitter.domain.usecase.UnfollowUser
 import kwitter.href
-import kwitter.location.IndexLocation
-import kwitter.location.LoginLocation
-import kwitter.location.UnfollowLocation
+
+@Location("/{username}/unfollow")
+class UnfollowLocation(val username: String)
 
 fun Route.unfollow() {
     post<UnfollowLocation> { unfollowLocation ->

@@ -1,6 +1,7 @@
 package kwitter.route
 
 import io.ktor.application.call
+import io.ktor.locations.Location
 import io.ktor.locations.get
 import io.ktor.response.respond
 import io.ktor.response.respondRedirect
@@ -16,7 +17,9 @@ import kwitter.freemarker.individualKweetFTLFollowing
 import kwitter.freemarker.individualKweetFTLGuest
 import kwitter.freemarker.individualKweetFTLNotFollowing
 import kwitter.href
-import kwitter.location.*
+
+@Location("/{username}/kweet/{kweetId}")
+class IndividualKweetLocation(val username: String, val kweetId: String)
 
 fun Route.individualKweet() {
     get<IndividualKweetLocation> {

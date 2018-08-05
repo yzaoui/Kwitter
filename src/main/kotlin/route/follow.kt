@@ -1,6 +1,7 @@
 package kwitter.route
 
 import io.ktor.application.call
+import io.ktor.locations.Location
 import io.ktor.locations.post
 import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
@@ -10,9 +11,9 @@ import kwitter.KwitterSession
 import kwitter.data.UserRepository
 import kwitter.domain.usecase.FollowUser
 import kwitter.href
-import kwitter.location.FollowLocation
-import kwitter.location.LoginLocation
-import kwitter.location.ProfileLocation
+
+@Location("/{username}/follow")
+class FollowLocation(val username: String)
 
 fun Route.follow() {
     post<FollowLocation> { followLocation ->
