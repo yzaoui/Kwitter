@@ -26,9 +26,37 @@ body {
     border-radius: 0;
 }
 
+.new-kweet-div {
+    padding: 10px 12px;
+    background-color: #E5F2F7;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
 .new-kweet-form {
     overflow: auto;
-    margin-bottom: 10px;
+}
+
+.new-kweet-form > textarea {
+    width: 100%;
+    min-height: 50px;
+    border-radius: 8px;
+}
+
+.new-kweet-form > button {
+    margin-top: 4px;
+    background-color: #329CC3;
+    color: #FFFFFF;
+    float: right;
+    cursor: pointer;
+    border-radius: 100px;
+    border-color: transparent;
+    font-weight: bold;
+    padding: 6px 16px;
+}
+
+.new-kweet-form > button:hover {
+    background-color: #0084B4;
 }
 
 .kweet-list {
