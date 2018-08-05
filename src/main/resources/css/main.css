@@ -148,8 +148,13 @@ body {
     float: left;
 }
 
+.profile-image > img {
+    width: 128px;
+    height: 128px;
+}
+
 .profile-details {
-    margin-left: 10px;
+    margin-left: 14px;
     float: left;
 }
 
@@ -181,6 +186,8 @@ body {
 .ikweet-author-img {
     margin-left: -72px;
     float: left;
+    width: 64px;
+    height: 64px;
 }
 
 .ikweet-author-group {

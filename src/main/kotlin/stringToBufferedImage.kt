@@ -2,7 +2,7 @@ import java.awt.Color
 import java.awt.image.BufferedImage
 import java.util.*
 
-fun stringToBufferedImage(stringSeed: String, numCellsX: Int = 8, numCellsY: Int = 8, cellWidthPixels: Int = 8, cellHeightPixels: Int = 8, flatImage: Boolean = false): BufferedImage {
+fun stringToBufferedImage(stringSeed: String, numCellsX: Int = 8, numCellsY: Int = 8, cellWidthPixels: Int = 16, cellHeightPixels: Int = 16, flatImage: Boolean = false): BufferedImage {
     val seed: Int = stringSeed.hashCode()
     val random = Random(seed.toLong())
 
