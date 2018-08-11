@@ -23,8 +23,6 @@ import kwitter.route.*
 
 data class KwitterSession(val username: String)
 
-const val MAX_KWEET_LENGTH = 280
-
 fun Application.main() {
     install(DefaultHeaders)
     install(CallLogging)
