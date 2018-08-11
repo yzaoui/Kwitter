@@ -19,18 +19,22 @@ import io.ktor.routing.application
 import io.ktor.routing.routing
 import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
+import kwitter.data.KweetRepository
 import kwitter.data.UserRepository
 import kwitter.domain.usecase.CheckFollowImpl
 import kwitter.domain.usecase.FollowUserImpl
+import kwitter.domain.usecase.ListHomeKweetsImpl
 import kwitter.route.*
 
 data class KwitterSession(val username: String)
 
 private val userRepo = UserRepository
+private val kweetRepo = KweetRepository
 
 // Use cases
 private val checkFollow = CheckFollowImpl(userRepo)
 private val followUser = FollowUserImpl(userRepo)
+private val listHomeKweets = ListHomeKweetsImpl(kweetRepo, userRepo)
 
 fun Application.main() {
     install(DefaultHeaders)
@@ -45,7 +49,7 @@ fun Application.main() {
         }
     }
     routing {
-        index()
+        index(listHomeKweets)
         login()
         logout()
         signUp()

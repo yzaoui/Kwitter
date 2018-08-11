@@ -22,7 +22,7 @@ import kwitter.href
 @Location("/")
 class IndexLocation
 
-fun Route.index() {
+fun Route.index(listHomeKweets: ListHomeKweets) {
     get<IndexLocation> {
         val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
         if (loggedInUser == null) {
@@ -33,7 +33,7 @@ fun Route.index() {
             return@get
         }
 
-        val kweetsFollowing = ListHomeKweets.getKweetsInReverseChronologicalOrder(loggedInUser.username)
+        val kweetsFollowing = listHomeKweets.getKweetsInReverseChronologicalOrder(loggedInUser.username)
         if (kweetsFollowing == null) {
             call.respondRedirect(href(IndexLocation()))
             return@get
