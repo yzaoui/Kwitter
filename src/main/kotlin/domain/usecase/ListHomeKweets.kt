@@ -4,11 +4,12 @@ import kwitter.data.KweetRepository
 import kwitter.data.UserRepository
 import kwitter.data.model.Kweet
 
-object ListHomeKweets {
-    private val kweetRepo = KweetRepository
-    private val userRepo = UserRepository
+interface ListHomeKweets {
+    fun getKweetsInReverseChronologicalOrder(username: String): Iterable<Kweet>?
+}
 
-    fun getKweetsInReverseChronologicalOrder(username: String): Iterable<Kweet>? {
+class ListHomeKweetsImpl(private val kweetRepo: KweetRepository, private val userRepo: UserRepository) : ListHomeKweets {
+    override fun getKweetsInReverseChronologicalOrder(username: String): Iterable<Kweet>? {
         val user = userRepo.get(username) ?: return null
 
         return kweetRepo.getAll()

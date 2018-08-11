@@ -2,12 +2,12 @@ package kwitter.domain.usecase
 
 import kwitter.data.UserRepository
 
-object FollowUser {
-    private val userRepo = UserRepository
+interface FollowUser {
+    fun follow(usernameFollower: String, usernameToFollow: String)
+}
 
-    fun follow(usernameFollower: String, usernameToFollow: String) {
-        userRepo.get(usernameFollower)?.let {
-            it.follows.add(usernameToFollow)
-        }
+class FollowUserImpl(private val userRepo: UserRepository) : FollowUser {
+    override fun follow(usernameFollower: String, usernameToFollow: String) {
+        userRepo.get(usernameFollower)?.follows?.add(usernameToFollow)
     }
 }

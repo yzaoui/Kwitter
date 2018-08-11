@@ -18,7 +18,7 @@ import kwitter.href
 @Location("/{username}")
 class ProfileLocation(val username: String)
 
-fun Route.profile() {
+fun Route.profile(listUserKweets: ListUserKweets) {
     get<ProfileLocation> { profileLocation ->
         val user = UserRepository.get(profileLocation.username)
 
@@ -28,7 +28,7 @@ fun Route.profile() {
         }
 
         val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
-        val htmlKweets = ListUserKweets.getKweetsInReverseChronologicalOrder(user.username)
+        val htmlKweets = listUserKweets.getKweetsInReverseChronologicalOrder(user.username)
             .map {
                 it.toHTMLKweet(UserRepository, { username, kweetId ->  href(IndividualKweetLocation(username, kweetId)) }, { username -> href(ProfileLocation(username)) })
             }

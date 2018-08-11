@@ -15,7 +15,7 @@ import kwitter.href
 @Location("/{username}/unfollow")
 class UnfollowLocation(val username: String)
 
-fun Route.unfollow() {
+fun Route.unfollow(unfollowUser: UnfollowUser) {
     post<UnfollowLocation> { unfollowLocation ->
         val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
         if (loggedInUser == null) {
@@ -23,7 +23,7 @@ fun Route.unfollow() {
             return@post
         }
 
-        UnfollowUser.unfollow(loggedInUser.username, unfollowLocation.username)
+        unfollowUser.unfollow(loggedInUser.username, unfollowLocation.username)
         call.respondRedirect(href(IndexLocation()))
     }
 }

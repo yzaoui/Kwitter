@@ -21,7 +21,7 @@ import kwitter.href
 @Location("/{username}/kweet/{kweetId}")
 class IndividualKweetLocation(val username: String, val kweetId: String)
 
-fun Route.individualKweet() {
+fun Route.individualKweet(checkFollow: CheckFollow) {
     get<IndividualKweetLocation> {
         val author = UserRepository.get(it.username)
         val kweet = KweetRepository.get(it.kweetId)
@@ -46,7 +46,7 @@ fun Route.individualKweet() {
                     generateAvatarURL = href(GenerateAvatarLocation())
                 ))
                 // Kweet of someone one follows
-                CheckFollow.follows(loggedInUser.username, author.username) -> call.respond(individualKweetFTLFollowing(
+                checkFollow.follows(loggedInUser.username, author.username) -> call.respond(individualKweetFTLFollowing(
                     htmlKweet = htmlKweet,
                     unfollowURL = href(UnfollowLocation(author.username)),
                     loggedInUser = loggedInUser,

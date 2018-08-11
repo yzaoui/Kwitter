@@ -19,9 +19,23 @@ import io.ktor.routing.application
 import io.ktor.routing.routing
 import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
+import kwitter.data.KweetRepository
+import kwitter.data.UserRepository
+import kwitter.domain.usecase.*
 import kwitter.route.*
 
 data class KwitterSession(val username: String)
+
+private val userRepo = UserRepository
+private val kweetRepo = KweetRepository
+
+// Use cases
+private val checkFollow = CheckFollowImpl(userRepo)
+private val followUser = FollowUserImpl(userRepo)
+private val unfollowUser = UnfollowUserImpl(userRepo)
+private val listHomeKweets = ListHomeKweetsImpl(kweetRepo, userRepo)
+private val listUserKweets = ListUserKweetsImpl(kweetRepo)
+private val usernameAvailability = UsernameAvailabilityImpl(userRepo, RESERVED_USERNAMES)
 
 fun Application.main() {
     install(DefaultHeaders)
@@ -36,15 +50,15 @@ fun Application.main() {
         }
     }
     routing {
-        index()
+        index(listHomeKweets)
         login()
         logout()
-        signUp()
+        signUp(usernameAvailability)
         newKweet()
-        profile()
-        individualKweet()
-        follow()
-        unfollow()
+        profile(listUserKweets)
+        individualKweet(checkFollow)
+        follow(followUser)
+        unfollow(unfollowUser)
         generateAvatar()
         static("assets") {
             static("css") {

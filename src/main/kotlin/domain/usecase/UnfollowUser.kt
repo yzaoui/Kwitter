@@ -2,12 +2,12 @@ package kwitter.domain.usecase
 
 import kwitter.data.UserRepository
 
-object UnfollowUser {
-    private val userRepo = UserRepository
+interface UnfollowUser {
+    fun unfollow(usernameFollower: String, usernameToUnfollow: String)
+}
 
-    fun unfollow(usernameFollower: String, usernameToUnfollow: String) {
-        userRepo.get(usernameFollower)?.let {
-            it.follows.remove(usernameToUnfollow)
-        }
+class UnfollowUserImpl(private val userRepo: UserRepository) : UnfollowUser {
+    override fun unfollow(usernameFollower: String, usernameToUnfollow: String) {
+        userRepo.get(usernameFollower)?.follows?.remove(usernameToUnfollow)
     }
 }
