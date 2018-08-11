@@ -47,7 +47,7 @@ fun Route.signUp(usernameAvailability: UsernameAvailability) {
                 profilePictureURL = "/assets/images/default.png"
             )
             UserRepository.create(newUser)
-            call.sessions.set(KwitterSession(newUser.username))
+            call.sessions.set(KwitterSession(newUser.username)) //TODO: Replace username in session
             call.respondRedirect(href(IndexLocation()))
         } else {
             if (usernameParam == null) errorMessages.add("Missing username.")

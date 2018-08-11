@@ -21,11 +21,17 @@ import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
 import kwitter.data.KweetRepository
 import kwitter.data.UserRepository
+import kwitter.data.UserTable
 import kwitter.domain.usecase.*
 import kwitter.route.*
+import org.h2.Driver
+import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.transactions.transaction
 
 data class KwitterSession(val username: String)
 
+// Repositories
 private val userRepo = UserRepository
 private val kweetRepo = KweetRepository
 
@@ -38,6 +44,8 @@ private val listUserKweets = ListUserKweetsImpl(kweetRepo)
 private val usernameAvailability = UsernameAvailabilityImpl(userRepo, RESERVED_USERNAMES)
 
 fun Application.main() {
+    Database.connect("jdbc:h2:~/testDB", Driver::class.qualifiedName!!)
+    transaction { SchemaUtils.create(UserTable) }
     install(DefaultHeaders)
     install(CallLogging)
     install(Locations)

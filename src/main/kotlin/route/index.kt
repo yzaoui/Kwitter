@@ -9,7 +9,7 @@ import io.ktor.routing.Route
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kwitter.KwitterSession
-import kwitter.MAX_KWEET_LENGTH
+import kwitter.KWEET_MAX_LENGTH
 import kwitter.USERNAME_REGEX
 import kwitter.data.UserRepository
 import kwitter.data.model.Kweet
@@ -47,7 +47,7 @@ fun Route.index(listHomeKweets: ListHomeKweets) {
             loggedInUserURL = href(ProfileLocation(loggedInUser.username)),
             logoutURL = href(LogoutLocation()),
             newKweetHref = href(NewKweetLocation()),
-            maxKweetLength = MAX_KWEET_LENGTH,
+            maxKweetLength = KWEET_MAX_LENGTH,
             htmlKweets = htmlKweets,
             generateAvatarURL = href(GenerateAvatarLocation())
         ))

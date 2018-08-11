@@ -6,7 +6,7 @@ interface UsernameAvailability {
     fun check(username: String): Boolean
 }
 
-class UsernameAvailabilityImpl(private val userRepo: UserRepository, private val reservedUsernames: Set<String>) : UsernameAvailability {
+class UsernameAvailabilityImpl(private val userRepo: UserRepository, private val reservedUsernames: Collection<String>) : UsernameAvailability {
     override fun check(username: String): Boolean {
         val takenUsernames = UserRepository.getUsernames()
 
