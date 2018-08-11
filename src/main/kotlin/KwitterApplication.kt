@@ -35,6 +35,7 @@ private val followUser = FollowUserImpl(userRepo)
 private val unfollowUser = UnfollowUserImpl(userRepo)
 private val listHomeKweets = ListHomeKweetsImpl(kweetRepo, userRepo)
 private val listUserKweets = ListUserKweetsImpl(kweetRepo)
+private val usernameAvailability = UsernameAvailabilityImpl(userRepo, RESERVED_USERNAMES)
 
 fun Application.main() {
     install(DefaultHeaders)
@@ -52,7 +53,7 @@ fun Application.main() {
         index(listHomeKweets)
         login()
         logout()
-        signUp()
+        signUp(usernameAvailability)
         newKweet()
         profile(listUserKweets)
         individualKweet(checkFollow)

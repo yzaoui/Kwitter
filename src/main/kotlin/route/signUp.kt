@@ -23,7 +23,7 @@ import kwitter.href
 @Location("/signup")
 class SignUpLocation
 
-fun Route.signUp() {
+fun Route.signUp(usernameAvailability: UsernameAvailability) {
     get<SignUpLocation> {
         call.respond(signupFTL(href(SignUpLocation())))
     }
@@ -33,7 +33,7 @@ fun Route.signUp() {
 
         val usernameParam = params["username"]
         val usernameValid = usernameParam?.matches(USERNAME_REGEX.toRegex()) ?: false
-        val usernameAvailable = usernameParam?.let { UsernameAvailability.check(it) } ?: false
+        val usernameAvailable = usernameParam?.let { usernameAvailability.check(it) } ?: false
         val passwordParam = params["password"]
         val displayNameParam = params["displayName"]
         val emailParam = params["email"]

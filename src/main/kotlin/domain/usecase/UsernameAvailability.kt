@@ -1,15 +1,15 @@
 package kwitter.domain.usecase
 
-import kwitter.RESERVED_USERNAMES
 import kwitter.data.UserRepository
 
-object UsernameAvailability {
-    private val userRepo = UserRepository
-    private val reservedUsername = RESERVED_USERNAMES
+interface UsernameAvailability {
+    fun check(username: String): Boolean
+}
 
-    fun check(username: String): Boolean {
+class UsernameAvailabilityImpl(private val userRepo: UserRepository, private val reservedUsernames: Set<String>) : UsernameAvailability {
+    override fun check(username: String): Boolean {
         val takenUsernames = UserRepository.getUsernames()
 
-        return username !in takenUsernames.plus(reservedUsername)
+        return username !in takenUsernames.plus(reservedUsernames)
     }
 }
