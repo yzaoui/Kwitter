@@ -21,12 +21,16 @@ import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
 import kwitter.data.UserRepository
 import kwitter.domain.usecase.CheckFollowImpl
+import kwitter.domain.usecase.FollowUserImpl
 import kwitter.route.*
 
 data class KwitterSession(val username: String)
 
 private val userRepo = UserRepository
+
+// Use cases
 private val checkFollow = CheckFollowImpl(userRepo)
+private val followUser = FollowUserImpl(userRepo)
 
 fun Application.main() {
     install(DefaultHeaders)
@@ -48,7 +52,7 @@ fun Application.main() {
         newKweet()
         profile()
         individualKweet(checkFollow)
-        follow()
+        follow(followUser)
         unfollow()
         generateAvatar()
         static("assets") {
