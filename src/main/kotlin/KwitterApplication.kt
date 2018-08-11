@@ -21,10 +21,7 @@ import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
 import kwitter.data.KweetRepository
 import kwitter.data.UserRepository
-import kwitter.domain.usecase.CheckFollowImpl
-import kwitter.domain.usecase.FollowUserImpl
-import kwitter.domain.usecase.ListHomeKweetsImpl
-import kwitter.domain.usecase.ListUserKweetsImpl
+import kwitter.domain.usecase.*
 import kwitter.route.*
 
 data class KwitterSession(val username: String)
@@ -35,6 +32,7 @@ private val kweetRepo = KweetRepository
 // Use cases
 private val checkFollow = CheckFollowImpl(userRepo)
 private val followUser = FollowUserImpl(userRepo)
+private val unfollowUser = UnfollowUserImpl(userRepo)
 private val listHomeKweets = ListHomeKweetsImpl(kweetRepo, userRepo)
 private val listUserKweets = ListUserKweetsImpl(kweetRepo)
 
@@ -59,7 +57,7 @@ fun Application.main() {
         profile(listUserKweets)
         individualKweet(checkFollow)
         follow(followUser)
-        unfollow()
+        unfollow(unfollowUser)
         generateAvatar()
         static("assets") {
             static("css") {
