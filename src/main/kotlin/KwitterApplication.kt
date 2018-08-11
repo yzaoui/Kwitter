@@ -24,6 +24,7 @@ import kwitter.data.UserRepository
 import kwitter.domain.usecase.CheckFollowImpl
 import kwitter.domain.usecase.FollowUserImpl
 import kwitter.domain.usecase.ListHomeKweetsImpl
+import kwitter.domain.usecase.ListUserKweetsImpl
 import kwitter.route.*
 
 data class KwitterSession(val username: String)
@@ -35,6 +36,7 @@ private val kweetRepo = KweetRepository
 private val checkFollow = CheckFollowImpl(userRepo)
 private val followUser = FollowUserImpl(userRepo)
 private val listHomeKweets = ListHomeKweetsImpl(kweetRepo, userRepo)
+private val listUserKweets = ListUserKweetsImpl(kweetRepo)
 
 fun Application.main() {
     install(DefaultHeaders)
@@ -54,7 +56,7 @@ fun Application.main() {
         logout()
         signUp()
         newKweet()
-        profile()
+        profile(listUserKweets)
         individualKweet(checkFollow)
         follow(followUser)
         unfollow()
