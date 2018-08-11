@@ -1,5 +1,6 @@
 package kwitter.route
 
+import at.favre.lib.crypto.bcrypt.BCrypt
 import io.ktor.application.call
 import io.ktor.locations.Location
 import io.ktor.locations.get
@@ -31,7 +32,7 @@ fun Route.login() {
 
         if (usernameParam != null && passwordParam != null) {
             val user = UserRepository.get(usernameParam)
-            if (passwordParam == user?.passwordHash) {
+            if (user != null && BCrypt.verifyer().verify(passwordParam.toByteArray(), user.passwordHash).verified) {
                 call.sessions.set(KwitterSession(user.username))
                 call.respondRedirect(href(IndexLocation()))
             } else {

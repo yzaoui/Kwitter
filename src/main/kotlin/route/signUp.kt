@@ -1,5 +1,6 @@
 package kwitter.route
 
+import at.favre.lib.crypto.bcrypt.BCrypt
 import io.ktor.application.call
 import io.ktor.locations.Location
 import io.ktor.locations.get
@@ -33,14 +34,14 @@ fun Route.signUp() {
         val usernameParam = params["username"]
         val usernameValid = usernameParam?.matches(USERNAME_REGEX.toRegex()) ?: false
         val usernameAvailable = usernameParam?.let { UsernameAvailability.check(it) } ?: false
-        val passwordParam = params["password"] //TODO: Handle password better
+        val passwordParam = params["password"]
         val displayNameParam = params["displayName"]
         val emailParam = params["email"]
 
         if (usernameParam != null && usernameValid && usernameAvailable && passwordParam != null && displayNameParam != null && emailParam != null) {
             val newUser = User(
                 username = usernameParam,
-                passwordHash = passwordParam,
+                passwordHash = BCrypt.withDefaults().hash(12, passwordParam.toByteArray()),
                 displayName = displayNameParam,
                 email = emailParam,
                 profilePictureURL = "/assets/images/default.png"
