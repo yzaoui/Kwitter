@@ -14,7 +14,6 @@ import io.ktor.sessions.set
 import kwitter.KwitterSession
 import kwitter.USERNAME_REGEX
 import kwitter.data.UserRepository
-import kwitter.data.model.User
 import kwitter.domain.usecase.UsernameAvailability
 import kwitter.freemarker.signupFTL
 import kwitter.freemarker.signupFTLError
@@ -27,27 +26,26 @@ fun Route.signUp(usernameAvailability: UsernameAvailability) {
     get<SignUpLocation> {
         call.respond(signupFTL(href(SignUpLocation())))
     }
-    post<SignUpLocation> { signUpLocation ->
+    post<SignUpLocation> {
         val params = call.receiveParameters()
         val errorMessages = mutableListOf<String>()
 
         val usernameParam = params["username"]
         val usernameValid = usernameParam?.matches(USERNAME_REGEX.toRegex()) ?: false
         val usernameAvailable = usernameParam?.let { usernameAvailability.check(it) } ?: false
-        val passwordParam = params["password"]
-        val displayNameParam = params["displayName"]
-        val emailParam = params["email"]
+        val passwordParam = params["password"] //TODO: Encourage stronger password
+        val displayNameParam = params["displayName"] //TODO: Validate display name
+        val emailParam = params["email"] //TODO: Validate email
 
         if (usernameParam != null && usernameValid && usernameAvailable && passwordParam != null && displayNameParam != null && emailParam != null) {
-            val newUser = User(
+            val userId = UserRepository.create(
                 username = usernameParam,
                 passwordHash = BCrypt.withDefaults().hash(12, passwordParam.toByteArray()),
                 displayName = displayNameParam,
                 email = emailParam,
                 profilePictureURL = "/assets/images/default.png"
             )
-            UserRepository.create(newUser)
-            call.sessions.set(KwitterSession(newUser.username)) //TODO: Replace username in session
+            call.sessions.set(KwitterSession(userId))
             call.respondRedirect(href(IndexLocation()))
         } else {
             if (usernameParam == null) errorMessages.add("Missing username.")

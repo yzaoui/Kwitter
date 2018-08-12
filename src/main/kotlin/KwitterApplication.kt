@@ -19,33 +19,29 @@ import io.ktor.routing.application
 import io.ktor.routing.routing
 import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
-import kwitter.data.KweetRepository
-import kwitter.data.UserRepository
-import kwitter.data.UserTable
+import kwitter.data.*
 import kwitter.domain.usecase.*
 import kwitter.route.*
 import org.h2.Driver
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
-data class KwitterSession(val username: String)
-
-// Repositories
-private val userRepo = UserRepository
-private val kweetRepo = KweetRepository
+data class KwitterSession(val userId: Int)
 
 // Use cases
-private val checkFollow = CheckFollowImpl(userRepo)
-private val followUser = FollowUserImpl(userRepo)
-private val unfollowUser = UnfollowUserImpl(userRepo)
-private val listHomeKweets = ListHomeKweetsImpl(kweetRepo, userRepo)
-private val listUserKweets = ListUserKweetsImpl(kweetRepo)
-private val usernameAvailability = UsernameAvailabilityImpl(userRepo, RESERVED_USERNAMES)
+private val checkFollow = CheckFollowImpl()
+private val followUser = FollowUserImpl()
+private val unfollowUser = UnfollowUserImpl()
+private val listHomeKweets = ListHomeKweetsImpl()
+private val listUserKweets = ListUserKweetsImpl()
+private val usernameAvailability = UsernameAvailabilityImpl(RESERVED_USERNAMES)
 
 fun Application.main() {
-    Database.connect("jdbc:h2:~/testDB", Driver::class.qualifiedName!!)
-    transaction { SchemaUtils.create(UserTable) }
+    Database.connect("jdbc:h2:./testDB", Driver::class.qualifiedName!!)
+    transaction {
+        addLogger(Slf4jSqlDebugLogger)
+        SchemaUtils.create(UserTable, KweetTable, FollowsTable)
+    }
     install(DefaultHeaders)
     install(CallLogging)
     install(Locations)

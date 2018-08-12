@@ -1,22 +1,40 @@
 package kwitter.data
 
+import kwitter.KWEET_MAX_LENGTH
 import kwitter.data.model.Kweet
+import org.jetbrains.exposed.dao.EntityID
+import org.jetbrains.exposed.dao.IntIdTable
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.Instant
 
 object KweetRepository {
-    private val kweets: MutableMap<String, Kweet> = mutableMapOf()
-
-    fun create(username: String, text: String) {
-        val id = kweets.size.toString()
-        kweets[id] = (Kweet(
-            id = id,
-            username = username,
-            text = text,
-            date = Instant.now()
-        ))
+    fun create(authorId: Int, kweetText: String) {
+        transaction {
+            KweetTable.insert {
+                it[KweetTable.authorId] = EntityID(authorId, UserTable)
+                it[KweetTable.text] = kweetText
+                it[KweetTable.timestampMS] = Instant.now().toEpochMilli()
+            }
+        }
     }
 
-    fun get(kweetId: String): Kweet? = kweets[kweetId]
-    fun getAll(): Iterable<Kweet> = kweets.values.asIterable()
-    fun getAllFrom(username: String): Iterable<Kweet> = kweets.values.filter { it.username == username }.asIterable()
+    fun get(kweetId: Int): Kweet? = transaction {
+        KweetTable.select { KweetTable.id.eq(kweetId) }
+            .mapNotNull { KweetTable.toKweet(it) }
+            .singleOrNull()
+    }
+}
+
+object KweetTable : IntIdTable() {
+    val authorId = reference("author_id", UserTable)
+    val text = varchar("text", KWEET_MAX_LENGTH)
+    val timestampMS = long("timestamp_ms")
+
+    fun toKweet(r: ResultRow): Kweet = Kweet(
+        id = r[KweetTable.id].value,
+        authorId = r[KweetTable.authorId].value,
+        text = r[KweetTable.text],
+        date = Instant.ofEpochMilli(r[KweetTable.timestampMS])
+    )
 }

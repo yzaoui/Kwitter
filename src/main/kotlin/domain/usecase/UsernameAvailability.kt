@@ -1,14 +1,20 @@
 package kwitter.domain.usecase
 
-import kwitter.data.UserRepository
+import kwitter.data.UserTable
+import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.transactions.transaction
 
 interface UsernameAvailability {
     fun check(username: String): Boolean
 }
 
-class UsernameAvailabilityImpl(private val userRepo: UserRepository, private val reservedUsernames: Collection<String>) : UsernameAvailability {
+class UsernameAvailabilityImpl(private val reservedUsernames: Collection<String>) : UsernameAvailability {
     override fun check(username: String): Boolean {
-        val takenUsernames = UserRepository.getUsernames()
+        val takenUsernames = transaction {
+            UserTable.slice(UserTable.username)
+                .selectAll()
+                .map { it[UserTable.username] }
+        }
 
         return username !in takenUsernames.plus(reservedUsernames)
     }

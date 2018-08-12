@@ -20,14 +20,14 @@ class ProfileLocation(val username: String)
 
 fun Route.profile(listUserKweets: ListUserKweets) {
     get<ProfileLocation> { profileLocation ->
-        val user = UserRepository.get(profileLocation.username)
-
+        val user = UserRepository.getByUsername(profileLocation.username)
         if (user == null) {
             call.respondRedirect(href(IndexLocation()))
             return@get
         }
 
-        val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+        val loggedInUser = call.sessions.get<KwitterSession>()?.let { UserRepository.get(it.userId) }
+
         val htmlKweets = listUserKweets.getKweetsInReverseChronologicalOrder(user.username)
             .map {
                 it.toHTMLKweet(UserRepository, { username, kweetId ->  href(IndividualKweetLocation(username, kweetId)) }, { username -> href(ProfileLocation(username)) })

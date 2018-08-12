@@ -1,13 +1,29 @@
 package kwitter.domain.usecase
 
+import kwitter.data.FollowsTable
 import kwitter.data.UserRepository
+import kwitter.data.UserTable
+import org.jetbrains.exposed.sql.JoinType
+import org.jetbrains.exposed.sql.alias
+import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
 
 interface CheckFollow {
     fun follows(usernameFollower: String, usernameTarget: String): Boolean
 }
 
-class CheckFollowImpl(private val userRepo: UserRepository) : CheckFollow {
+class CheckFollowImpl : CheckFollow {
     override fun follows(usernameFollower: String, usernameTarget: String): Boolean {
-        return (userRepo.get(usernameFollower) ?: return false).follows.contains(usernameTarget)
+        val count = transaction {
+            val follower = UserTable.alias("follower")
+            val target = UserTable.alias("target")
+            FollowsTable.join(follower, JoinType.INNER, FollowsTable.followerId, follower[UserTable.id])
+                .join(target, JoinType.INNER, FollowsTable.targetId, target[UserTable.id])
+                .select { follower[UserTable.username].eq(usernameFollower).and(target[UserTable.username].eq(usernameTarget)) }
+                .count()
+        }
+
+        return count > 0
     }
 }

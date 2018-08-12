@@ -31,9 +31,9 @@ fun Route.login() {
         val passwordParam = params["password"]
 
         if (usernameParam != null && passwordParam != null) {
-            val user = UserRepository.get(usernameParam)
+            val user = UserRepository.getByUsername(usernameParam)
             if (user != null && BCrypt.verifyer().verify(passwordParam.toByteArray(), user.passwordHash).verified) {
-                call.sessions.set(KwitterSession(user.username))
+                call.sessions.set(KwitterSession(user.id))
                 call.respondRedirect(href(IndexLocation()))
             } else {
                 call.respond(loginPageWithError(

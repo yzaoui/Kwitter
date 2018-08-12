@@ -17,7 +17,7 @@ class UnfollowLocation(val username: String)
 
 fun Route.unfollow(unfollowUser: UnfollowUser) {
     post<UnfollowLocation> { unfollowLocation ->
-        val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+        val loggedInUser = call.sessions.get<KwitterSession>()?.let { UserRepository.get(it.userId) }
         if (loggedInUser == null) {
             call.respondRedirect(href(LoginLocation()))
             return@post
