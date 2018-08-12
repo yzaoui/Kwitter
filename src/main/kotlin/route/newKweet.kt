@@ -9,7 +9,7 @@ import io.ktor.routing.Route
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kwitter.KwitterSession
-import kwitter.MAX_KWEET_LENGTH
+import kwitter.KWEET_MAX_LENGTH
 import kwitter.data.KweetRepository
 import kwitter.data.UserRepository
 import kwitter.href
@@ -19,7 +19,7 @@ class NewKweetLocation
 
 fun Route.newKweet() {
     post<NewKweetLocation> {
-        val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+        val loggedInUser = call.sessions.get<KwitterSession>()?.let { UserRepository.get(it.userId) }
         if (loggedInUser == null) {
             call.respondRedirect(href(LoginLocation()))
             return@post
@@ -29,7 +29,7 @@ fun Route.newKweet() {
         val newKweetText = params["new-kweet-text"]
 
         // In case of invalid submission, return to homepage
-        if (newKweetText == null || newKweetText.length !in 1..MAX_KWEET_LENGTH) {
+        if (newKweetText == null || newKweetText.length !in 1..KWEET_MAX_LENGTH) {
             call.respondRedirect(href(IndexLocation()))
             return@post
         }
@@ -42,7 +42,7 @@ fun Route.newKweet() {
             Regex("\\n{3,}").replace(it, "\n\n")
         }
 
-        KweetRepository.create(loggedInUser.username, transformedKweetText)
+        KweetRepository.create(loggedInUser.id, transformedKweetText)
         call.respondRedirect(href(IndexLocation()))
     }
 }

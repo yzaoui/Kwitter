@@ -21,19 +21,19 @@ import kwitter.href
 @Location("/{username}/kweet/{kweetId}")
 class IndividualKweetLocation(val username: String, val kweetId: String)
 
-fun Route.individualKweet() {
+fun Route.individualKweet(checkFollow: CheckFollow) {
     get<IndividualKweetLocation> {
-        val author = UserRepository.get(it.username)
-        val kweet = KweetRepository.get(it.kweetId)
+        val author = UserRepository.getByUsername(it.username)
+        val kweet = KweetRepository.get(it.kweetId.toInt())
 
-        if (!(author != null && kweet != null && kweet.username == author.username)) {
+        if (!(author != null && kweet != null && kweet.authorId == author.id)) {
             call.respondRedirect(href(IndexLocation()))
             return@get
         }
 
         val htmlKweet = kweet.toHTMLKweet(UserRepository, { username, kweetId -> href(IndividualKweetLocation(username, kweetId)) }, { username -> href(ProfileLocation(username)) })
 
-        val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+        val loggedInUser = call.sessions.get<KwitterSession>()?.let { UserRepository.get(it.userId) }
 
         if (loggedInUser != null) {
             when {
@@ -46,7 +46,7 @@ fun Route.individualKweet() {
                     generateAvatarURL = href(GenerateAvatarLocation())
                 ))
                 // Kweet of someone one follows
-                CheckFollow.follows(loggedInUser.username, author.username) -> call.respond(individualKweetFTLFollowing(
+                checkFollow.follows(loggedInUser.username, author.username) -> call.respond(individualKweetFTLFollowing(
                     htmlKweet = htmlKweet,
                     unfollowURL = href(UnfollowLocation(author.username)),
                     loggedInUser = loggedInUser,

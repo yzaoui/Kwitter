@@ -19,11 +19,29 @@ import io.ktor.routing.application
 import io.ktor.routing.routing
 import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
+import kwitter.data.*
+import kwitter.domain.usecase.*
 import kwitter.route.*
+import org.h2.Driver
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.transactions.transaction
 
-data class KwitterSession(val username: String)
+data class KwitterSession(val userId: Int)
+
+// Use cases
+private val checkFollow = CheckFollowImpl()
+private val followUser = FollowUserImpl()
+private val unfollowUser = UnfollowUserImpl()
+private val listHomeKweets = ListHomeKweetsImpl()
+private val listUserKweets = ListUserKweetsImpl()
+private val usernameAvailability = UsernameAvailabilityImpl(RESERVED_USERNAMES)
 
 fun Application.main() {
+    Database.connect("jdbc:h2:./testDB", Driver::class.qualifiedName!!)
+    transaction {
+        addLogger(Slf4jSqlDebugLogger)
+        SchemaUtils.create(UserTable, KweetTable, FollowsTable)
+    }
     install(DefaultHeaders)
     install(CallLogging)
     install(Locations)
@@ -36,15 +54,15 @@ fun Application.main() {
         }
     }
     routing {
-        index()
+        index(listHomeKweets)
         login()
         logout()
-        signUp()
+        signUp(usernameAvailability)
         newKweet()
-        profile()
-        individualKweet()
-        follow()
-        unfollow()
+        profile(listUserKweets)
+        individualKweet(checkFollow)
+        follow(followUser)
+        unfollow(unfollowUser)
         generateAvatar()
         static("assets") {
             static("css") {

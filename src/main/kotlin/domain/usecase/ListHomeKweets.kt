@@ -1,18 +1,33 @@
 package kwitter.domain.usecase
 
-import kwitter.data.KweetRepository
-import kwitter.data.UserRepository
+import kwitter.data.FollowsTable
+import kwitter.data.KweetTable
+import kwitter.data.UserTable
 import kwitter.data.model.Kweet
+import org.jetbrains.exposed.sql.JoinType
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
 
-object ListHomeKweets {
-    private val kweetRepo = KweetRepository
-    private val userRepo = UserRepository
+interface ListHomeKweets {
+    fun getHomeKweetsInReverseChronologicalOrder(userId: Int): Iterable<Kweet>?
+}
 
-    fun getKweetsInReverseChronologicalOrder(username: String): Iterable<Kweet>? {
-        val user = userRepo.get(username) ?: return null
+class ListHomeKweetsImpl : ListHomeKweets {
+    override fun getHomeKweetsInReverseChronologicalOrder(userId: Int): Iterable<Kweet>? = transaction {
+        val userExists = UserTable.select { UserTable.id.eq(userId) }
+            .count() > 0
 
-        return kweetRepo.getAll()
-            .filter { user.follows.contains(it.username) || user.username == it.username }
-            .sortedByDescending { it.date }
+        if (!userExists) return@transaction null
+
+        // TODO: Once Exposed supports union, use here instead of two separate queries
+        val followsKweets = FollowsTable.join(KweetTable, JoinType.INNER, FollowsTable.targetId, KweetTable.authorId)
+            .slice(KweetTable.columns)
+            .select { FollowsTable.followerId.eq(userId) }
+            .map { KweetTable.toKweet(it) }
+
+        val selfKweets = KweetTable.select { KweetTable.authorId.eq(userId) }
+            .mapNotNull { KweetTable.toKweet(it) }
+
+        return@transaction followsKweets.plus(selfKweets).sortedByDescending { it.date }
     }
 }

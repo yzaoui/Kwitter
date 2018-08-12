@@ -15,15 +15,15 @@ import kwitter.href
 @Location("/{username}/follow")
 class FollowLocation(val username: String)
 
-fun Route.follow() {
+fun Route.follow(followUser: FollowUser) {
     post<FollowLocation> { followLocation ->
-        val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+        val loggedInUser = call.sessions.get<KwitterSession>()?.let { UserRepository.get(it.userId) }
         if (loggedInUser == null) {
             call.respondRedirect(href(LoginLocation()))
             return@post
         }
 
-        FollowUser.follow(loggedInUser.username, followLocation.username)
+        followUser.follow(loggedInUser.username, followLocation.username)
         call.respondRedirect(href(ProfileLocation(followLocation.username)))
     }
 }

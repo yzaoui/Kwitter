@@ -25,7 +25,7 @@ class GenerateAvatarLocation()
 
 fun Route.generateAvatar() {
     get<GenerateAvatarLocation> {
-        val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+        val loggedInUser = call.sessions.get<KwitterSession>()?.let { UserRepository.get(it.userId) }
         if (loggedInUser == null) {
             call.respondRedirect(href(LoginLocation()))
             return@get
@@ -34,7 +34,7 @@ fun Route.generateAvatar() {
         call.respond(generateAvatarFTL(href(GenerateAvatarLocation()), loggedInUser, href(ProfileLocation(loggedInUser.username)), href(LogoutLocation())))
     }
     post<GenerateAvatarLocation> {
-        val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+        val loggedInUser = call.sessions.get<KwitterSession>()?.let { UserRepository.get(it.userId) }
         if (loggedInUser == null) {
             call.respondRedirect(href(LoginLocation()))
             return@post
@@ -51,7 +51,7 @@ fun Route.generateAvatar() {
             return@post
         }
 
-        UserRepository.get(loggedInUser.username)!!.profilePictureURL = "/assets/images/user/$filename"
+        UserRepository.changeProfilePictureURL(loggedInUser.id, "/assets/images/user/$filename")
 
         call.respondRedirect(href(ProfileLocation(loggedInUser.username)))
     }

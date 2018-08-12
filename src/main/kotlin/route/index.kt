@@ -9,7 +9,7 @@ import io.ktor.routing.Route
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kwitter.KwitterSession
-import kwitter.MAX_KWEET_LENGTH
+import kwitter.KWEET_MAX_LENGTH
 import kwitter.USERNAME_REGEX
 import kwitter.data.UserRepository
 import kwitter.data.model.Kweet
@@ -22,9 +22,9 @@ import kwitter.href
 @Location("/")
 class IndexLocation
 
-fun Route.index() {
+fun Route.index(listHomeKweets: ListHomeKweets) {
     get<IndexLocation> {
-        val loggedInUser = call.sessions.get<KwitterSession>()?.username?.let { UserRepository.get(it) }
+        val loggedInUser = call.sessions.get<KwitterSession>()?.let { UserRepository.get(it.userId) }
         if (loggedInUser == null) {
             call.respond(welcomeFTL(
                 signUpHref = href(SignUpLocation()),
@@ -33,9 +33,11 @@ fun Route.index() {
             return@get
         }
 
-        val kweetsFollowing = ListHomeKweets.getKweetsInReverseChronologicalOrder(loggedInUser.username)
+        //TODO: Temp replace null with empty
+        val kweetsFollowing = listHomeKweets.getHomeKweetsInReverseChronologicalOrder(loggedInUser.id) ?: listOf()
         if (kweetsFollowing == null) {
-            call.respondRedirect(href(IndexLocation()))
+            //TODO: Respond with some error indicating can't load kweets
+            call.respondRedirect(href(LoginLocation()))
             return@get
         }
 
@@ -47,7 +49,7 @@ fun Route.index() {
             loggedInUserURL = href(ProfileLocation(loggedInUser.username)),
             logoutURL = href(LogoutLocation()),
             newKweetHref = href(NewKweetLocation()),
-            maxKweetLength = MAX_KWEET_LENGTH,
+            maxKweetLength = KWEET_MAX_LENGTH,
             htmlKweets = htmlKweets,
             generateAvatarURL = href(GenerateAvatarLocation())
         ))
@@ -59,23 +61,23 @@ fun Kweet.toHTMLKweet(
     kweetURLGenerator: (username: String, kweetId: String) -> String,
     profileURLGenerator: (username: String) -> String
 ): HTMLKweet {
-    val user = userRepo.get(username)!!
+    val author = userRepo.get(authorId)!!
     return HTMLKweet(
-        id = id,
+        id = id.toString(),
         text = text,
         html = "@$USERNAME_REGEX".toRegex().replace(text) {
             val username = it.value.removePrefix("@")
-            if (UserRepository.get(username) != null) {
+            if (UserRepository.getByUsername(username) != null) {
                 "<a href=\"${profileURLGenerator(username)}\">${it.value}</a>"
             } else {
                 it.value
             }
         },
         dateText = date.toString(),
-        kweetURL = kweetURLGenerator(username, id),
-        authorDisplayName = user.displayName,
-        authorUsername = user.username,
-        authorProfilePictureURL = user.profilePictureURL,
-        authorProfileURL = profileURLGenerator(user.username)
+        kweetURL = kweetURLGenerator(author.username, id.toString()),
+        authorDisplayName = author.displayName,
+        authorUsername = author.username,
+        authorProfilePictureURL = author.profilePictureURL,
+        authorProfileURL = profileURLGenerator(author.username)
     )
 }
