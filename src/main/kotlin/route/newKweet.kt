@@ -1,5 +1,10 @@
-package kwitter.route
+package com.bitwiserain.kwitter.route
 
+import com.bitwiserain.kwitter.KWEET_MAX_LENGTH
+import com.bitwiserain.kwitter.KwitterSession
+import com.bitwiserain.kwitter.data.KweetRepository
+import com.bitwiserain.kwitter.data.UserRepository
+import com.bitwiserain.kwitter.href
 import io.ktor.application.call
 import io.ktor.locations.Location
 import io.ktor.locations.post
@@ -8,11 +13,6 @@ import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
-import kwitter.KwitterSession
-import kwitter.KWEET_MAX_LENGTH
-import kwitter.data.KweetRepository
-import kwitter.data.UserRepository
-import kwitter.href
 
 @Location("/new-kweet")
 class NewKweetLocation

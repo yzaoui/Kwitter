@@ -1,7 +1,7 @@
-package freemarker
+package com.bitwiserain.kwitter.freemarker
 
+import com.bitwiserain.kwitter.data.model.User
 import io.ktor.freemarker.FreeMarkerContent
-import kwitter.data.model.User
 
 fun generateAvatarFTL(generateAvatarURL: String, loggedInUser: User, loggedInUserURL: String, logoutURL: String) = FreeMarkerContent(
     template = "generate-avatar.ftl",

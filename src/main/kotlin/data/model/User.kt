@@ -1,4 +1,4 @@
-package kwitter.data.model
+package com.bitwiserain.kwitter.data.model
 
 import java.util.*
 

@@ -1,6 +1,10 @@
-package kwitter.route
+package com.bitwiserain.kwitter.route
 
-import freemarker.generateAvatarFTL
+import com.bitwiserain.kwitter.KwitterSession
+import com.bitwiserain.kwitter.data.UserRepository
+import com.bitwiserain.kwitter.freemarker.generateAvatarFTL
+import com.bitwiserain.kwitter.href
+import com.bitwiserain.kwitter.stringToBufferedImage
 import io.ktor.application.application
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -12,10 +16,6 @@ import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
-import kwitter.KwitterSession
-import kwitter.data.UserRepository
-import kwitter.href
-import stringToBufferedImage
 import java.io.File
 import java.io.IOException
 import javax.imageio.ImageIO

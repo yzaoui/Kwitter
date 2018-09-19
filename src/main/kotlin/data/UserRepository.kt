@@ -1,9 +1,9 @@
-package kwitter.data
+package com.bitwiserain.kwitter.data
 
-import kwitter.DISPLAY_NAME_MAX_LENGTH
-import kwitter.EMAIL_MAX_LENGTH
-import kwitter.USERNAME_MAX_LENGTH
-import kwitter.data.model.User
+import com.bitwiserain.kwitter.DISPLAY_NAME_MAX_LENGTH
+import com.bitwiserain.kwitter.EMAIL_MAX_LENGTH
+import com.bitwiserain.kwitter.USERNAME_MAX_LENGTH
+import com.bitwiserain.kwitter.data.model.User
 import org.jetbrains.exposed.dao.IntIdTable
 import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.select

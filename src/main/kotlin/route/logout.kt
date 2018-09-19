@@ -1,5 +1,7 @@
-package kwitter.route
+package com.bitwiserain.kwitter.route
 
+import com.bitwiserain.kwitter.KwitterSession
+import com.bitwiserain.kwitter.href
 import io.ktor.application.call
 import io.ktor.locations.Location
 import io.ktor.locations.post
@@ -7,8 +9,6 @@ import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
 import io.ktor.sessions.clear
 import io.ktor.sessions.sessions
-import kwitter.KwitterSession
-import kwitter.href
 
 @Location("/logout")
 class LogoutLocation

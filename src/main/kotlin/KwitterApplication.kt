@@ -1,5 +1,10 @@
-package kwitter
+package com.bitwiserain.kwitter
 
+import com.bitwiserain.kwitter.data.FollowsTable
+import com.bitwiserain.kwitter.data.KweetTable
+import com.bitwiserain.kwitter.data.UserTable
+import com.bitwiserain.kwitter.domain.usecase.*
+import com.bitwiserain.kwitter.route.*
 import freemarker.cache.ClassTemplateLoader
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
@@ -19,11 +24,11 @@ import io.ktor.routing.application
 import io.ktor.routing.routing
 import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
-import kwitter.data.*
-import kwitter.domain.usecase.*
-import kwitter.route.*
 import org.h2.Driver
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.Slf4jSqlDebugLogger
+import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.transactions.transaction
 
 data class KwitterSession(val userId: Int)

@@ -1,5 +1,11 @@
-package kwitter.route
+package com.bitwiserain.kwitter.route
 
+import com.bitwiserain.kwitter.KwitterSession
+import com.bitwiserain.kwitter.data.UserRepository
+import com.bitwiserain.kwitter.domain.usecase.ListUserKweets
+import com.bitwiserain.kwitter.freemarker.profileFTL
+import com.bitwiserain.kwitter.freemarker.profileFTLGuest
+import com.bitwiserain.kwitter.href
 import io.ktor.application.call
 import io.ktor.locations.Location
 import io.ktor.locations.get
@@ -8,12 +14,6 @@ import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
-import kwitter.KwitterSession
-import kwitter.data.UserRepository
-import kwitter.domain.usecase.ListUserKweets
-import kwitter.freemarker.profileFTL
-import kwitter.freemarker.profileFTLGuest
-import kwitter.href
 
 @Location("/{username}")
 class ProfileLocation(val username: String)

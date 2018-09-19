@@ -1,7 +1,7 @@
-package kwitter.freemarker
+package com.bitwiserain.kwitter.freemarker
 
 import io.ktor.freemarker.FreeMarkerContent
-import kwitter.USERNAME_REGEX
+import com.bitwiserain.kwitter.USERNAME_REGEX
 
 fun signupFTL(signUpURL: String) = FreeMarkerContent(
     template = "signup.ftl",

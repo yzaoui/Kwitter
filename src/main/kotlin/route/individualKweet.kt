@@ -1,5 +1,14 @@
-package kwitter.route
+package com.bitwiserain.kwitter.route
 
+import com.bitwiserain.kwitter.KwitterSession
+import com.bitwiserain.kwitter.data.KweetRepository
+import com.bitwiserain.kwitter.data.UserRepository
+import com.bitwiserain.kwitter.domain.usecase.CheckFollow
+import com.bitwiserain.kwitter.freemarker.individualKweetFTL
+import com.bitwiserain.kwitter.freemarker.individualKweetFTLFollowing
+import com.bitwiserain.kwitter.freemarker.individualKweetFTLGuest
+import com.bitwiserain.kwitter.freemarker.individualKweetFTLNotFollowing
+import com.bitwiserain.kwitter.href
 import io.ktor.application.call
 import io.ktor.locations.Location
 import io.ktor.locations.get
@@ -8,15 +17,6 @@ import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
-import kwitter.KwitterSession
-import kwitter.data.KweetRepository
-import kwitter.data.UserRepository
-import kwitter.domain.usecase.CheckFollow
-import kwitter.freemarker.individualKweetFTL
-import kwitter.freemarker.individualKweetFTLFollowing
-import kwitter.freemarker.individualKweetFTLGuest
-import kwitter.freemarker.individualKweetFTLNotFollowing
-import kwitter.href
 
 @Location("/{username}/kweet/{kweetId}")
 class IndividualKweetLocation(val username: String, val kweetId: String)

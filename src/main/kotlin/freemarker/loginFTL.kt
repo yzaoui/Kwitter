@@ -1,4 +1,4 @@
-package kwitter.freemarker
+package com.bitwiserain.kwitter.freemarker
 
 import io.ktor.freemarker.FreeMarkerContent
 

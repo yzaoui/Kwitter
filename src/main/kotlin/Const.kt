@@ -1,4 +1,4 @@
-package kwitter
+package com.bitwiserain.kwitter
 
 const val USERNAME_MAX_LENGTH = 15
 const val USERNAME_REGEX = "[A-Za-z0-9_]{1,$USERNAME_MAX_LENGTH}"

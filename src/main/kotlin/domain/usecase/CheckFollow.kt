@@ -1,8 +1,7 @@
-package kwitter.domain.usecase
+package com.bitwiserain.kwitter.domain.usecase
 
-import kwitter.data.FollowsTable
-import kwitter.data.UserRepository
-import kwitter.data.UserTable
+import com.bitwiserain.kwitter.data.FollowsTable
+import com.bitwiserain.kwitter.data.UserTable
 import org.jetbrains.exposed.sql.JoinType
 import org.jetbrains.exposed.sql.alias
 import org.jetbrains.exposed.sql.and

@@ -1,7 +1,7 @@
-package kwitter.freemarker
+package com.bitwiserain.kwitter.freemarker
 
+import com.bitwiserain.kwitter.data.model.User
 import io.ktor.freemarker.FreeMarkerContent
-import kwitter.data.model.User
 
 fun individualKweetFTLGuest(htmlKweet: HTMLKweet, loginURL: String) = FreeMarkerContent(
     template = "individual-kweet.ftl",

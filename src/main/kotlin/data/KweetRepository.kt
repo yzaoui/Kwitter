@@ -1,7 +1,7 @@
-package kwitter.data
+package com.bitwiserain.kwitter.data
 
-import kwitter.KWEET_MAX_LENGTH
-import kwitter.data.model.Kweet
+import com.bitwiserain.kwitter.KWEET_MAX_LENGTH
+import com.bitwiserain.kwitter.data.model.Kweet
 import org.jetbrains.exposed.dao.EntityID
 import org.jetbrains.exposed.dao.IntIdTable
 import org.jetbrains.exposed.sql.*

@@ -1,5 +1,15 @@
-package kwitter.route
+package com.bitwiserain.kwitter.route
 
+import com.bitwiserain.kwitter.KWEET_MAX_LENGTH
+import com.bitwiserain.kwitter.KwitterSession
+import com.bitwiserain.kwitter.USERNAME_REGEX
+import com.bitwiserain.kwitter.data.UserRepository
+import com.bitwiserain.kwitter.data.model.Kweet
+import com.bitwiserain.kwitter.domain.usecase.ListHomeKweets
+import com.bitwiserain.kwitter.freemarker.HTMLKweet
+import com.bitwiserain.kwitter.freemarker.homeFTL
+import com.bitwiserain.kwitter.freemarker.welcomeFTL
+import com.bitwiserain.kwitter.href
 import io.ktor.application.call
 import io.ktor.locations.Location
 import io.ktor.locations.get
@@ -8,16 +18,6 @@ import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
-import kwitter.KwitterSession
-import kwitter.KWEET_MAX_LENGTH
-import kwitter.USERNAME_REGEX
-import kwitter.data.UserRepository
-import kwitter.data.model.Kweet
-import kwitter.domain.usecase.ListHomeKweets
-import kwitter.freemarker.HTMLKweet
-import kwitter.freemarker.homeFTL
-import kwitter.freemarker.welcomeFTL
-import kwitter.href
 
 @Location("/")
 class IndexLocation

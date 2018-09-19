@@ -1,6 +1,13 @@
-package kwitter.route
+package com.bitwiserain.kwitter.route
 
 import at.favre.lib.crypto.bcrypt.BCrypt
+import com.bitwiserain.kwitter.KwitterSession
+import com.bitwiserain.kwitter.USERNAME_REGEX
+import com.bitwiserain.kwitter.data.UserRepository
+import com.bitwiserain.kwitter.domain.usecase.UsernameAvailability
+import com.bitwiserain.kwitter.freemarker.signupFTL
+import com.bitwiserain.kwitter.freemarker.signupFTLError
+import com.bitwiserain.kwitter.href
 import io.ktor.application.call
 import io.ktor.locations.Location
 import io.ktor.locations.get
@@ -11,13 +18,6 @@ import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
 import io.ktor.sessions.sessions
 import io.ktor.sessions.set
-import kwitter.KwitterSession
-import kwitter.USERNAME_REGEX
-import kwitter.data.UserRepository
-import kwitter.domain.usecase.UsernameAvailability
-import kwitter.freemarker.signupFTL
-import kwitter.freemarker.signupFTLError
-import kwitter.href
 
 @Location("/signup")
 class SignUpLocation

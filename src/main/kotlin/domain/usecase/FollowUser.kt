@@ -1,10 +1,10 @@
-package kwitter.domain.usecase
+package com.bitwiserain.kwitter.domain.usecase
 
+import com.bitwiserain.kwitter.data.FollowsTable
+import com.bitwiserain.kwitter.data.UserTable
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.runBlocking
-import kwitter.data.FollowsTable
-import kwitter.data.UserTable
 import org.jetbrains.exposed.dao.EntityID
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
