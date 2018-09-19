@@ -6,4 +6,4 @@ const val DISPLAY_NAME_MAX_LENGTH = 255
 const val EMAIL_MAX_LENGTH = 256
 const val KWEET_MAX_LENGTH = 280
 
-val RESERVED_USERNAMES = setOf("login", "logout", "signup")
+val RESERVED_USERNAMES = setOf("login", "logout", "signup", "assets")
