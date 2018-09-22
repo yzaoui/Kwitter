@@ -10,12 +10,12 @@ import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
 import io.ktor.application.application
 import io.ktor.application.install
-import io.ktor.content.files
-import io.ktor.content.resources
-import io.ktor.content.static
 import io.ktor.features.CallLogging
 import io.ktor.features.DefaultHeaders
 import io.ktor.freemarker.FreeMarker
+import io.ktor.http.content.files
+import io.ktor.http.content.resources
+import io.ktor.http.content.static
 import io.ktor.locations.Locations
 import io.ktor.locations.locations
 import io.ktor.pipeline.PipelineContext
