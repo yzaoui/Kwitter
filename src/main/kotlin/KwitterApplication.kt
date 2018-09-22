@@ -1,8 +1,8 @@
 package com.bitwiserain.kwitter
 
-import com.bitwiserain.kwitter.data.FollowsTable
-import com.bitwiserain.kwitter.data.KweetTable
-import com.bitwiserain.kwitter.data.UserTable
+import com.bitwiserain.kwitter.db.FollowsTable
+import com.bitwiserain.kwitter.db.KweetTable
+import com.bitwiserain.kwitter.db.UserTable
 import com.bitwiserain.kwitter.domain.usecase.*
 import com.bitwiserain.kwitter.route.*
 import freemarker.cache.ClassTemplateLoader

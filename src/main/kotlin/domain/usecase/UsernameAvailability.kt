@@ -1,6 +1,6 @@
 package com.bitwiserain.kwitter.domain.usecase
 
-import com.bitwiserain.kwitter.data.UserTable
+import com.bitwiserain.kwitter.db.UserTable
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 

@@ -1,7 +1,7 @@
 package com.bitwiserain.kwitter.domain.usecase
 
-import com.bitwiserain.kwitter.data.FollowsTable
-import com.bitwiserain.kwitter.data.UserTable
+import com.bitwiserain.kwitter.db.FollowsTable
+import com.bitwiserain.kwitter.db.UserTable
 import org.jetbrains.exposed.sql.JoinType
 import org.jetbrains.exposed.sql.alias
 import org.jetbrains.exposed.sql.and

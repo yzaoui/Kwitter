@@ -1,7 +1,7 @@
 package com.bitwiserain.kwitter.route
 
 import com.bitwiserain.kwitter.KwitterSession
-import com.bitwiserain.kwitter.data.UserRepository
+import com.bitwiserain.kwitter.db.UserRepository
 import com.bitwiserain.kwitter.freemarker.generateAvatarFTL
 import com.bitwiserain.kwitter.href
 import com.bitwiserain.kwitter.stringToBufferedImage

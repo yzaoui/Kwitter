@@ -2,7 +2,7 @@ package com.bitwiserain.kwitter.route
 
 import at.favre.lib.crypto.bcrypt.BCrypt
 import com.bitwiserain.kwitter.KwitterSession
-import com.bitwiserain.kwitter.data.UserRepository
+import com.bitwiserain.kwitter.db.UserRepository
 import com.bitwiserain.kwitter.freemarker.loginFTL
 import com.bitwiserain.kwitter.href
 import io.ktor.application.call
