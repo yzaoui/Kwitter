@@ -3,7 +3,7 @@ package com.bitwiserain.kwitter.domain.usecase
 import com.bitwiserain.kwitter.data.FollowsTable
 import com.bitwiserain.kwitter.data.KweetTable
 import com.bitwiserain.kwitter.data.UserTable
-import com.bitwiserain.kwitter.data.model.Kweet
+import com.bitwiserain.kwitter.domain.model.Kweet
 import org.jetbrains.exposed.sql.JoinType
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction

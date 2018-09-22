@@ -15,7 +15,7 @@ fun stringToBufferedImage(stringSeed: String, numCellsX: Int = 8, numCellsY: Int
     val foregroundColor = Color(50, 50, 50).rgb
 
     // avatar is a bitmap of RGB integers
-    val avatar = Array(numCellsX, { IntArray(numCellsY) })
+    val avatar = Array(numCellsX) { IntArray(numCellsY) }
     for (x in 0 until numCellsX / 2 + if (numCellsX % 2 == 0) 0 else 1) {
         val middleColumn = x == numCellsX - 1 - x
         for (y in 0 until numCellsY) {
