@@ -14,7 +14,7 @@ interface UnfollowUser {
     fun unfollow(usernameFollower: String, usernameTarget: String)
 }
 
-class UnfollowUserImpl() : UnfollowUser {
+class UnfollowUserImpl : UnfollowUser {
     private fun fetchIdFromUsername(username: String): Deferred<Int?> = async {
         transaction {
             UserTable.slice(UserTable.id)

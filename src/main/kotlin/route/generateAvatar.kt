@@ -21,7 +21,7 @@ import java.io.IOException
 import javax.imageio.ImageIO
 
 @Location("/generate-avatar")
-class GenerateAvatarLocation()
+class GenerateAvatarLocation
 
 fun Route.generateAvatar() {
     get<GenerateAvatarLocation> {

@@ -28,6 +28,8 @@ class ListHomeKweetsImpl : ListHomeKweets {
         val selfKweets = KweetTable.select { KweetTable.authorId.eq(userId) }
             .mapNotNull { KweetTable.toKweet(it) }
 
-        return@transaction followsKweets.plus(selfKweets).sortedByDescending { it.date }
+        return@transaction followsKweets.asSequence()
+            .plus(selfKweets)
+            .sortedByDescending { it.date }.toList()
     }
 }
