@@ -34,7 +34,7 @@ fun Route.index(listHomeKweets: ListHomeKweets) {
         }
 
         //TODO: Temp replace null with empty
-        val kweetsFollowing = listHomeKweets.getHomeKweetsInReverseChronologicalOrder(loggedInUser.id) ?: listOf()
+        val kweetsFollowing = listHomeKweets.getHomeKweetsInReverseChronologicalOrder(loggedInUser.id)
         if (kweetsFollowing == null) {
             //TODO: Respond with some error indicating can't load kweets
             call.respondRedirect(href(LoginLocation()))
