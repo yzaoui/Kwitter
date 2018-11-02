@@ -2,8 +2,8 @@ package com.bitwiserain.kwitter.route
 
 import com.bitwiserain.kwitter.KWEET_MAX_LENGTH
 import com.bitwiserain.kwitter.KwitterSession
-import com.bitwiserain.kwitter.db.KweetRepository
-import com.bitwiserain.kwitter.db.UserRepository
+import com.bitwiserain.kwitter.db.repository.KweetRepository
+import com.bitwiserain.kwitter.db.repository.UserRepository
 import com.bitwiserain.kwitter.href
 import io.ktor.application.call
 import io.ktor.locations.Location

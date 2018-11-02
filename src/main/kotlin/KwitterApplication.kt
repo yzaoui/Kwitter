@@ -1,9 +1,9 @@
 package com.bitwiserain.kwitter
 
-import com.bitwiserain.kwitter.db.FollowsTable
-import com.bitwiserain.kwitter.db.KweetTable
-import com.bitwiserain.kwitter.db.UserTable
-import com.bitwiserain.kwitter.domain.usecase.*
+import com.bitwiserain.kwitter.db.table.FollowsTable
+import com.bitwiserain.kwitter.db.table.KweetTable
+import com.bitwiserain.kwitter.db.table.UserTable
+import com.bitwiserain.kwitter.db.usecase.*
 import com.bitwiserain.kwitter.route.*
 import freemarker.cache.ClassTemplateLoader
 import io.ktor.application.Application

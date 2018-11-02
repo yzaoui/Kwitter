@@ -1,4 +1,4 @@
-package com.bitwiserain.kwitter.db
+package com.bitwiserain.kwitter.db.table
 
 import com.bitwiserain.kwitter.KWEET_MAX_LENGTH
 import com.bitwiserain.kwitter.domain.model.Kweet
@@ -12,9 +12,9 @@ object KweetTable : IntIdTable() {
     val timestampMS = long("timestamp_ms")
 
     fun toKweet(r: ResultRow): Kweet = Kweet(
-        id = r[KweetTable.id].value,
-        authorId = r[KweetTable.authorId].value,
-        text = r[KweetTable.text],
-        date = Instant.ofEpochMilli(r[KweetTable.timestampMS])
+        id = r[id].value,
+        authorId = r[authorId].value,
+        text = r[text],
+        date = Instant.ofEpochMilli(r[timestampMS])
     )
 }

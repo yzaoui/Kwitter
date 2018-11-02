@@ -1,8 +1,8 @@
 package com.bitwiserain.kwitter.route
 
 import com.bitwiserain.kwitter.KwitterSession
-import com.bitwiserain.kwitter.db.KweetRepository
-import com.bitwiserain.kwitter.db.UserRepository
+import com.bitwiserain.kwitter.db.repository.KweetRepository
+import com.bitwiserain.kwitter.db.repository.UserRepository
 import com.bitwiserain.kwitter.domain.usecase.CheckFollow
 import com.bitwiserain.kwitter.freemarker.individualKweetFTL
 import com.bitwiserain.kwitter.freemarker.individualKweetFTLFollowing

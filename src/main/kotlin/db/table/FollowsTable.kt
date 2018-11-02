@@ -1,4 +1,4 @@
-package com.bitwiserain.kwitter.db
+package com.bitwiserain.kwitter.db.table
 
 import org.jetbrains.exposed.sql.Table
 

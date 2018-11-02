@@ -1,4 +1,4 @@
-package com.bitwiserain.kwitter.db
+package com.bitwiserain.kwitter.db.table
 
 import com.bitwiserain.kwitter.DISPLAY_NAME_MAX_LENGTH
 import com.bitwiserain.kwitter.EMAIL_MAX_LENGTH

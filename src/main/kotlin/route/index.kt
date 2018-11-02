@@ -3,7 +3,7 @@ package com.bitwiserain.kwitter.route
 import com.bitwiserain.kwitter.KWEET_MAX_LENGTH
 import com.bitwiserain.kwitter.KwitterSession
 import com.bitwiserain.kwitter.USERNAME_REGEX
-import com.bitwiserain.kwitter.db.UserRepository
+import com.bitwiserain.kwitter.db.repository.UserRepository
 import com.bitwiserain.kwitter.domain.model.Kweet
 import com.bitwiserain.kwitter.domain.usecase.ListHomeKweets
 import com.bitwiserain.kwitter.freemarker.HTMLKweet

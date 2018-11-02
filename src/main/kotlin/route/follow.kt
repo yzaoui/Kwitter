@@ -1,7 +1,7 @@
 package com.bitwiserain.kwitter.route
 
 import com.bitwiserain.kwitter.KwitterSession
-import com.bitwiserain.kwitter.db.UserRepository
+import com.bitwiserain.kwitter.db.repository.UserRepository
 import com.bitwiserain.kwitter.domain.usecase.FollowUser
 import com.bitwiserain.kwitter.href
 import io.ktor.application.call
