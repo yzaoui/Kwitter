@@ -2,9 +2,10 @@ package com.bitwiserain.kwitter.domain.usecase
 
 import com.bitwiserain.kwitter.db.FollowsTable
 import com.bitwiserain.kwitter.db.UserTable
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.select
@@ -15,7 +16,7 @@ interface UnfollowUser {
 }
 
 class UnfollowUserImpl : UnfollowUser {
-    private fun fetchIdFromUsername(username: String): Deferred<Int?> = async {
+    private fun fetchIdFromUsername(username: String): Deferred<Int?> = GlobalScope.async {
         transaction {
             UserTable.slice(UserTable.id)
                 .select { UserTable.username.eq(username) }
