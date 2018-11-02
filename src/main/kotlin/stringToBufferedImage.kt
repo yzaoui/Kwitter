@@ -2,7 +2,7 @@ package com.bitwiserain.kwitter
 
 import java.awt.Color
 import java.awt.image.BufferedImage
-import java.util.*
+import kotlin.random.Random
 
 fun stringToBufferedImage(stringSeed: String, numCellsX: Int = 8, numCellsY: Int = 8, cellWidthPixels: Int = 16, cellHeightPixels: Int = 16, flatImage: Boolean = false): BufferedImage {
     val seed: Int = stringSeed.hashCode()
